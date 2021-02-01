@@ -19,8 +19,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Order.EmployeeId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList(""+Model.Order.EmployeeId, new SelectList(Model.Employees.Distinct().ToList(), "Id", "Name", Model.Order.EmployeeId))
-            
+            @Html.DropDownList("Order." + nameof(Model.Order.EmployeeId), new SelectList(Model.Employees.Distinct().ToList(), "Id", "Name", Model.Order.EmployeeId), new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Order.EmployeeId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -28,7 +27,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Order.CustomerId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("" + Model.Order.CustomerId, new SelectList(Model.Customers.Distinct().ToList(), "Id", "Name", Model.Order.CustomerId))
+            @Html.DropDownList("Order." + nameof(Model.Order.CustomerId), new SelectList(Model.Customers.Distinct().ToList(), "Id", "Name", Model.Order.CustomerId), new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Order.CustomerId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -52,8 +51,18 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Order.StatusId, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("" + Model.Order.StatusId, new SelectList(Model.Statuses.Distinct().ToList(), "Id", "StatusDescription", Model.Order.StatusId))
+            @Html.DropDownList("Order." + nameof(Model.Order.StatusId), new SelectList(Model.Statuses.Distinct().ToList(), "Id", "StatusDescription", Model.Order.StatusId), new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Order.StatusId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Order.ToDo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Order.ToDo)
+                @Html.ValidationMessageFor(model => model.Order.ToDo, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
 

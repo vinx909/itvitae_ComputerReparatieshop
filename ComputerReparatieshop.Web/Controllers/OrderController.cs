@@ -30,12 +30,12 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            IEnumerable<Order> orders = orderDb.GetAll();
-            List<Order_Index_Order> model = new List<Order_Index_Order>();
+            IEnumerable<Order> orders = orderDb.GetAllToDo();
+            List<Order_Detail> model = new List<Order_Detail>();
 
             foreach(Order order in orders)
             {
-                model.Add(new Order_Index_Order { Id = order.Id, EmployeeName = employeeDb.Get(order.EmployeeId).Name, CustomerName = customerDb.Get(order.CustomerId).Name, StartDate = order.StartDate, EndDate = order.EndDate, Discription = order.Discription, StatusId = statusDb.Get(order.StatusId).StatusDescription});
+                model.Add(GetOrderDetail(order));
             }
 
             return View(model);
@@ -44,36 +44,43 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Order/Details/5
         public ActionResult Details(int id)
         {
-            
-            return View();
+            Order_Detail model = GetOrderDetail(orderDb.Get(id));
+            return View(model);
         }
 
         // GET: Order/Create
         public ActionResult Create()
         {
-            return View();
+            Order_Edit model = GetOrderEdit(new Order());
+
+            return View(model);
         }
 
         // POST: Order/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Order order)
         {
             try
             {
-                // TODO: Add insert logic here
+                orderDb.Create(order);
+
+                order.ToDo = true;
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                Order_Edit model = GetOrderEdit(order);
+
+                return View(model);
             }
         }
 
         // GET: Order/Edit/5
         public ActionResult Edit(int id)
         {
-            Order_Edit model = new Order_Edit { Order = orderDb.Get(id), Customers = customerDb.GetAll(), Employees = employeeDb.GetAll(), Statuses = statusDb.GetAll() };
+            Order order = orderDb.Get(id);
+            Order_Edit model = GetOrderEdit(order);
             if (model.Order == null)
             {
                 return View("notFound");
@@ -85,7 +92,6 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpPost]
         public ActionResult Edit(int id, Order order)
         {
-
             try
             {
                 // TODO: Add update logic here
@@ -95,30 +101,43 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             catch
             {
-                return View();
+                Order_Edit model = GetOrderEdit(order);
+                return View(model);
             }
         }
+
 
         // GET: Order/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Order_Detail model = GetOrderDetail(orderDb.Get(id));
+            return View(model);
         }
 
         // POST: Order/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Order order)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                orderDb.Delete(order);
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                Order_Detail model = GetOrderDetail(order);
+                return View(model);
             }
+        }
+
+        private Order_Detail GetOrderDetail(Order order)
+        {
+            return new Order_Detail { Id = order.Id, EmployeeName = employeeDb.Get(order.EmployeeId).Name, CustomerName = customerDb.Get(order.CustomerId).Name, StartDate = order.StartDate, EndDate = order.EndDate, Discription = order.Discription, Status = statusDb.Get(order.StatusId).StatusDescription, ToDo=order.ToDo};
+        }
+
+        private Order_Edit GetOrderEdit(Order order)
+        {
+            return new Order_Edit { Order = order, Customers = customerDb.GetAll(), Employees = employeeDb.GetAll(), Statuses = statusDb.GetAll() };
         }
     }
 }

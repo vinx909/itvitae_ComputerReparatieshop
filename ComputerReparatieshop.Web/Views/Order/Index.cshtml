@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ComputerReparatieshop.Web.Models.Order_Index_Order>
+﻿@model IEnumerable<ComputerReparatieshop.Web.Models.Order_Detail>
 
 @{
     ViewBag.Title = "Index";
@@ -24,7 +24,7 @@
             @Html.DisplayNameFor(model => model.EndDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StatusId)
+            @Html.DisplayNameFor(model => model.Status)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Discription)
@@ -47,7 +47,7 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StatusId)
+            @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Discription)
