@@ -13,6 +13,7 @@ namespace ComputerReparatieshop.Web.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Status { get; set; }
+        public string StatusColour { get; set; }
         public string Discription { get; set; }
         public bool ToDo { get; set; }
     }

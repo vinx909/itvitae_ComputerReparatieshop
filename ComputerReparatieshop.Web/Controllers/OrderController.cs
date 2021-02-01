@@ -132,7 +132,8 @@ namespace ComputerReparatieshop.Web.Controllers
 
         private Order_Detail GetOrderDetail(Order order)
         {
-            return new Order_Detail { Id = order.Id, EmployeeName = employeeDb.Get(order.EmployeeId).Name, CustomerName = customerDb.Get(order.CustomerId).Name, StartDate = order.StartDate, EndDate = order.EndDate, Discription = order.Discription, Status = statusDb.Get(order.StatusId).StatusDescription, ToDo=order.ToDo};
+            var status = statusDb.Get(order.StatusId);
+            return new Order_Detail { Id = order.Id, EmployeeName = employeeDb.Get(order.EmployeeId).Name, CustomerName = customerDb.Get(order.CustomerId).Name, StartDate = order.StartDate, EndDate = order.EndDate, Discription = order.Discription, Status = status.StatusDescription, StatusColour=status.Colour, ToDo=order.ToDo};
         }
 
         private Order_Edit GetOrderEdit(Order order)

@@ -15,10 +15,10 @@ namespace ComputerReparatieshop.Data.Services
         {
             statuses = new List<Status>()
             {
-                new Status(){Id=0, StatusDescription="in afwachting"},
-                new Status(){Id=1, StatusDescription="in behandeling"},
-                new Status(){Id=2, StatusDescription="wacht op onderdelen"},
-                new Status(){Id=3, StatusDescription="klaar"}
+                new Status(){Id=0, StatusDescription="in afwachting", Colour = "#FF8888"},
+                new Status(){Id=1, StatusDescription="in behandeling", Colour= "#8888FF"},
+                new Status(){Id=2, StatusDescription="wacht op onderdelen", Colour= "#FFFF88"},
+                new Status(){Id=3, StatusDescription="klaar", Colour = "#88FF88"}
             };
         }
 
