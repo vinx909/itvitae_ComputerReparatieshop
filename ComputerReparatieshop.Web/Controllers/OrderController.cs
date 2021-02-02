@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using ComputerReparatieshop.Data.Models;
 using ComputerReparatieshop.Data.Services;
@@ -6,8 +7,11 @@ using ComputerReparatieshop.Web.Models;
 
 namespace ComputerReparatieshop.Web.Controllers
 {
+
     public class OrderController : Controller
     {
+        private const string StarDateChangedColour = "#FF0000";
+
         private ICustomerData customerDb;
         private IEmployeeData employeeDb;
         private IImageListData imageListDb;
@@ -27,17 +31,37 @@ namespace ComputerReparatieshop.Web.Controllers
             this.statusDb = statusDb;
         }
 
-        // GET: Order
-        public ActionResult Index()
+        public ActionResult Index(int? Id)
         {
             IEnumerable<Order> orders = orderDb.GetAllToDo();
-            List<Order_Detail> model = new List<Order_Detail>();
+            IEnumerable<Status> statuses = statusDb.GetAll();
+            List<Order_Index_Status> modelStatus = new List<Order_Index_Status>();
+            List<Order_Detail> modelOrders = new List<Order_Detail>();
 
-            foreach(Order order in orders)
+            foreach(Status status in statuses)
             {
-                model.Add(GetOrderDetail(order));
+                modelStatus.Add(new Order_Index_Status { Id = status.Id, Status = status.StatusDescription, StatusColour = status.Colour, Amount = 0 });
             }
 
+            foreach (Order order in orders)
+            {
+                Order_Detail newOrderDetail = GetOrderDetail(order);
+                for(int i = 0; i < modelStatus.Count; i++)
+                {
+                    if (order.StatusId == modelStatus[i].Id)
+                    {
+                        modelStatus[i].Amount++;
+                        break;
+                    }
+                }
+                if (newOrderDetail.Id == Id)
+                {
+                    newOrderDetail.StatusColour = StarDateChangedColour;
+                }
+                modelOrders.Add(newOrderDetail);
+            }
+
+            Order_Index model = new Order_Index { AmountPerStatuses = modelStatus, orders = modelOrders };
             return View(model);
         }
 
@@ -95,9 +119,16 @@ namespace ComputerReparatieshop.Web.Controllers
             try
             {
                 // TODO: Add update logic here
-                
+                DateTime oldStartDate = orderDb.Get(id).StartDate;
                 orderDb.Edit(order);
-                return RedirectToAction("Index");
+                if (order.StartDate == oldStartDate)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index/" + id);
+                }
             }
             catch
             {

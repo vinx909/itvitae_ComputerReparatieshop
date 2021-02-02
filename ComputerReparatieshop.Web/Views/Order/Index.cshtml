@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ComputerReparatieshop.Web.Models.Order_Detail>
+﻿@model ComputerReparatieshop.Web.Models.Order_Index
 
 @{
     ViewBag.Title = "Index";
@@ -10,31 +10,55 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-
+@{ ComputerReparatieshop.Web.Models.Order_Index_Status dummyStatus = Model.AmountPerStatuses.FirstOrDefault();}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeName)
+            @Html.DisplayNameFor(model => dummyStatus.Status)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerName)
+            @Html.DisplayNameFor(model => dummyStatus.Amount)
+        </th>
+    </tr>
+
+    @foreach (var item in Model.AmountPerStatuses)
+    {
+        <tr style="background-color: @item.StatusColour;">
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+        </tr>
+        }
+    </table>
+
+@{ ComputerReparatieshop.Web.Models.Order_Detail dummyOrder = Model.orders.FirstOrDefault();}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => dummyOrder.EmployeeName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => dummyOrder.CustomerName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => dummyOrder.StartDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => dummyOrder.EndDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Discription)
+            @Html.DisplayNameFor(model => dummyOrder.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => dummyOrder.Discription)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.orders)
     {
         <tr style="background-color: @item.StatusColour;">
             <td>
