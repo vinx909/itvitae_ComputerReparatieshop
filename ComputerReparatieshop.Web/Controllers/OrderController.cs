@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using ComputerReparatieshop.Data.Models;
 using ComputerReparatieshop.Data.Services;
@@ -10,7 +11,9 @@ namespace ComputerReparatieshop.Web.Controllers
 
     public class OrderController : Controller
     {
-        private const string StarDateChangedColour = "#FF0000";
+        private const string starDateChangedColour = "#FF0000";
+        private const int createdOrderStatusId = 1;
+        private const bool createdOrderToDO = true;
 
         private readonly ICustomerData customerDb;
         private readonly IEmployeeData employeeDb;
@@ -56,12 +59,12 @@ namespace ComputerReparatieshop.Web.Controllers
                 }
                 if (newOrderDetail.Id == Id)
                 {
-                    newOrderDetail.StatusColour = StarDateChangedColour;
+                    newOrderDetail.StatusColour = starDateChangedColour;
                 }
                 modelOrders.Add(newOrderDetail);
             }
 
-            Order_Index model = new Order_Index { AmountPerStatuses = modelStatus, orders = modelOrders };
+            Order_Index model = new Order_Index { AmountPerStatuses = modelStatus, Orders = modelOrders };
             return View(model);
         }
 
@@ -86,6 +89,9 @@ namespace ComputerReparatieshop.Web.Controllers
         {
             try
             {
+                order.StatusId = createdOrderStatusId;
+                order.ToDo = createdOrderToDO;
+
                 orderDb.Create(order);
 
                 order.ToDo = true;
@@ -139,6 +145,7 @@ namespace ComputerReparatieshop.Web.Controllers
 
 
         // GET: Order/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             Order_Detail model = GetOrderDetail(orderDb.Get(id));
@@ -147,35 +154,45 @@ namespace ComputerReparatieshop.Web.Controllers
 
         // POST: Order/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Order order)
+        public ActionResult Delete(int id, Order irrelavent)
         {
             try
             {
+                Order order = orderDb.Get(id);
                 orderDb.Delete(order);
                 return RedirectToAction("Index");
             }
             catch
             {
-                Order_Detail model = GetOrderDetail(order);
-                return View(model);
+                return Delete(id);
             }
         }
 
+        /*
         private Order_Detail GetOrderDetail(Order order)
         {
             var status = statusDb.Get(order.StatusId);
-            return new Order_Detail { Id = order.Id, EmployeeName = employeeDb.Get(order.EmployeeId).Name, CustomerName = customerDb.Get(order.CustomerId).Name, StartDate = order.StartDate, EndDate = order.EndDate, Discription = order.Discription, Status = status.StatusDescription, StatusColour=status.StatusColour, ToDo=order.ToDo};
+            return GetOrderDetail(order, status);
+        }
+
+        private Order_Detail GetOrderDetail(Order order, IEnumerable<Status> statuses)
+        {
+            Status status = statuses.FirstOrDefault(s => s.Id == order.StatusId);
+            return GetOrderDetail(order, status);
+        }
+        */
+
+        private Order_Detail GetOrderDetail(Order order)
+        {
+            Status status = statusDb.Get(order.StatusId);
+            string employeeName = employeeDb.Get(order.EmployeeId).Name;
+            string customerName = customerDb.Get(order.CustomerId).Name;
+            return new Order_Detail { Id = order.Id, EmployeeName = employeeName, CustomerName = customerName, StartDate = order.StartDate, EndDate = order.EndDate.GetValueOrDefault(), Description = order.Description, Status = status.StatusDescription, StatusColour = status.StatusColour, ToDo = order.ToDo };
         }
 
         private Order_Edit GetOrderEdit(Order order)
         {
             return new Order_Edit { Order = order, Customers = customerDb.GetAll(), Employees = employeeDb.GetAll(), Statuses = statusDb.GetAll() };
-        }
-
-        public  ActionResult Test(int? id)
-        {
-            var model = orderDb.GetAll();
-            return View(model);
         }
     }
 }

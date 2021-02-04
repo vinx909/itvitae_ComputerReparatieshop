@@ -9,12 +9,13 @@ namespace ComputerReparatieshop.Data.Services
 {
     public class InMemoryPartsListData : IPartsListData
     {
-        public PartsList Get(int id)
+
+        public IEnumerable<PartsList> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<PartsList> GetAll()
+        IEnumerable<PartsList> IPartsListData.Get(int id)
         {
             throw new NotImplementedException();
         }

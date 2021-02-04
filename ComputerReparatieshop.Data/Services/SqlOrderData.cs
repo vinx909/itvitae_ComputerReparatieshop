@@ -25,9 +25,8 @@ namespace ComputerReparatieshop.Data.Services
         public void Delete(Order order)
         {
             order.ToDo = false;
-            var entry = db.Entry(order);
-            entry.State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+            Edit(order);
+            //db.Orders.Remove(order);
         }
 
         public void Edit(Order order)
@@ -39,7 +38,7 @@ namespace ComputerReparatieshop.Data.Services
 
         public Order Get(int id)
         {
-            return db.Orders.FirstOrDefault(o => o.Id == id);
+            return db.Orders.Find(id);
         }
 
         public IEnumerable<Order> GetAll()
@@ -49,7 +48,7 @@ namespace ComputerReparatieshop.Data.Services
 
         public IEnumerable<Order> GetAllToDo()
         {
-            return db.Orders.Where(o => o.ToDo == false);
+            return db.Orders.Where(o => o.ToDo == true);
         }
     }
 }

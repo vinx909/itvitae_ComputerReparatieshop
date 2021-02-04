@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ComputerReparatieshop.Data.Models
 {
@@ -12,6 +13,6 @@ namespace ComputerReparatieshop.Data.Models
         [Required]
         [RegularExpression(@"^\d+\.\d{0,2}$")]
         [Range(0, 9999999999999999.99)]
-        public double PayPerHour { get; set; }
+        public Decimal PayPerHour { get; set; }
     }
 }

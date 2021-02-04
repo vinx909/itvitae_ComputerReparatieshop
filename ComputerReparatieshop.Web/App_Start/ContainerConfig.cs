@@ -18,13 +18,13 @@ namespace ComputerReparatieshop.Web
             ///*
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<ComputerReparatieshopDbContext>().InstancePerRequest();
-            builder.RegisterType<SqlCustomerData>().As<ICustomerData>().InstancePerHttpRequest();
-            builder.RegisterType<SqlEmployeeData>().As<IEmployeeData>().InstancePerHttpRequest();
-            builder.RegisterType<SqlImageData>().As<IImageData>().InstancePerHttpRequest();
-            builder.RegisterType<SqlOrderData>().As<IOrderData>().InstancePerHttpRequest();
-            builder.RegisterType<SqlPartData>().As<IPartData>().InstancePerHttpRequest();
-            builder.RegisterType<SqlPartsListData>().As<IPartsListData>().InstancePerHttpRequest();
-            builder.RegisterType<SqlStatusData>().As<IStatusData>().InstancePerHttpRequest();
+            builder.RegisterType<SqlCustomerData>().As<ICustomerData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
+            builder.RegisterType<SqlEmployeeData>().As<IEmployeeData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
+            builder.RegisterType<SqlImageData>().As<IImageData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
+            builder.RegisterType<SqlOrderData>().As<IOrderData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
+            builder.RegisterType<SqlPartData>().As<IPartData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
+            builder.RegisterType<SqlPartsListData>().As<IPartsListData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
+            builder.RegisterType<SqlStatusData>().As<IStatusData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
             //*/
 
             /*

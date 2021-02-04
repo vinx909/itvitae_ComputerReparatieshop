@@ -15,7 +15,7 @@ namespace ComputerReparatieshop.Data.Services
         {
             orders = new List<Order>()
             {
-                new Order { Id = 0, CustomerId = 0, EmployeeId = 1, StatusId = 0, Discription = "It won't turn on.", StartDate = DateTime.Now, ToDo=true }
+                new Order { Id = 0, CustomerId = 0, EmployeeId = 1, StatusId = 0, Description = "It won't turn on.", StartDate = DateTime.Now, ToDo=true }
             };
 
         }
@@ -35,7 +35,7 @@ namespace ComputerReparatieshop.Data.Services
         {
             Order toEdit = orders.Find(o => o.Id == order.Id);
             toEdit.CustomerId = order.CustomerId;
-            toEdit.Discription = order.Discription;
+            toEdit.Description = order.Description;
             toEdit.EmployeeId = order.EmployeeId;
             toEdit.EndDate = order.EndDate;
             toEdit.StartDate = order.StartDate;

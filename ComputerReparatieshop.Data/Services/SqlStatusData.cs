@@ -17,12 +17,12 @@ namespace ComputerReparatieshop.Data.Services
         }
         public Status Get(int id)
         {
-            return db.Statuses.FirstOrDefault(s => s.Id == id);
+            return db.Status.Find(id);
         }
 
         public IEnumerable<Status> GetAll()
         {
-            return db.Statuses;
+            return db.Status;
         }
     }
 }

@@ -17,7 +17,7 @@ namespace ComputerReparatieshop.Data.Services
         }
         public Part Get(int id)
         {
-            return db.Parts.FirstOrDefault(p => p.Id == id);
+            return db.Parts.Find(id);
         }
 
         public IEnumerable<Part> GetAll()

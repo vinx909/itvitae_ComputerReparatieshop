@@ -18,7 +18,7 @@ namespace ComputerReparatieshop.Data.Services
 
         public Customer Get(int id)
         {
-            return db.Customers.FirstOrDefault(c => c.Id == id);
+            return db.Customers.Find(id);
         }
 
         public IEnumerable<Customer> GetAll()

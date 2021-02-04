@@ -14,7 +14,7 @@ namespace ComputerReparatieshop.Web.Models
         public DateTime EndDate { get; set; }
         public string Status { get; set; }
         public string StatusColour { get; set; }
-        public string Discription { get; set; }
+        public string Description { get; set; }
         public bool ToDo { get; set; }
     }
 }

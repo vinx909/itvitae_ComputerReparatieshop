@@ -127,12 +127,12 @@ CREATE TABLE [dbo].[PartsList](
 	) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/** Object:  Table [dbo].[Statuses]    Script Date: 1/29/2021 3:01:54 PM **/
+/** Object:  Table [dbo].[Status]    Script Date: 1/29/2021 3:01:54 PM **/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Statuses](
+CREATE TABLE [dbo].[Status](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[StatusDescription] [varchar](50) NOT NULL,
 	[StatusColour] [varchar](7) Not Null,
@@ -158,7 +158,7 @@ GO
 ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Order_Employee]
 GO
 ALTER TABLE [dbo].[Orders]  WITH CHECK ADD  CONSTRAINT [FK_Order_Status] FOREIGN KEY([StatusId])
-REFERENCES [dbo].[Statuses] ([Id])
+REFERENCES [dbo].[Status] ([Id])
 GO
 ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Order_Status]
 GO

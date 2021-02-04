@@ -11,7 +11,7 @@ Values  ('Bob J', 1600 ),
         ('Emma T', 599 ),
         ('Tim W', 4500);
 
-INSERT INTO Statuses (StatusDescription, StatusColour)
+INSERT INTO Status (StatusDescription, StatusColour)
 VALUES  ('in afwachting', '#FF8888'),
         ('in behandeling', '#8888FF'),
         ('wacht op onderdelen', '#FFFF88'),

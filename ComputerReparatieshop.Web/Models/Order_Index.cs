@@ -8,6 +8,6 @@ namespace ComputerReparatieshop.Web.Models
     public class Order_Index
     {
         public IEnumerable<Order_Index_Status> AmountPerStatuses { get; set; }
-        public IEnumerable<Order_Detail> orders { get; set; }
+        public IEnumerable<Order_Detail> Orders { get; set; }
     }
 }

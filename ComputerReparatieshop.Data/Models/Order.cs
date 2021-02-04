@@ -17,12 +17,11 @@ namespace ComputerReparatieshop.Data.Models
         public int CustomerId { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
-        [Required]
-        public DateTime EndDate { get; set; }
+        public Nullable<DateTime> EndDate { get; set; }
         [Required]
         public int StatusId { get; set; }
         [MaxLength(1000)]
-        public string Discription { get; set; }
+        public string Description { get; set; }
         [Required]
         public bool ToDo { get; set; }
     }

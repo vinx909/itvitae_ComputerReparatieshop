@@ -6,6 +6,6 @@ namespace ComputerReparatieshop.Data.Services
     public interface IPartsListData
     {
         IEnumerable<PartsList> GetAll();
-        PartsList Get(int id);
+        IEnumerable<PartsList> Get(int id);
     }
 }
