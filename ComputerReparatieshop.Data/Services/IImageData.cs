@@ -3,9 +3,9 @@ using ComputerReparatieshop.Data.Models;
 
 namespace ComputerReparatieshop.Data.Services
 {
-    public interface IImageListData
+    public interface IImageData
     {
-        IEnumerable<ImageList> GetAll();
-        IEnumerable<ImageList> Get(int id);
+        IEnumerable<Image> GetAll();
+        IEnumerable<Image> Get(int id);
     }
 }

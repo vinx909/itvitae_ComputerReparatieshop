@@ -6,6 +6,6 @@ namespace ComputerReparatieshop.Data.Services
     public interface IEmployeeData
     {
         IEnumerable<Employee> GetAll();
-        Employee Get(int employeeId);
+        Employee Get(int id);
     }
 }

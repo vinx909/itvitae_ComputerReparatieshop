@@ -12,15 +12,15 @@ namespace ComputerReparatieshop.Web.Controllers
     {
         private const string StarDateChangedColour = "#FF0000";
 
-        private ICustomerData customerDb;
-        private IEmployeeData employeeDb;
-        private IImageListData imageListDb;
-        private IOrderData orderDb;
-        private IPartData partDb;
-        private IPartsListData partsListDb;
-        private IStatusData statusDb;
+        private readonly ICustomerData customerDb;
+        private readonly IEmployeeData employeeDb;
+        private readonly IImageData imageListDb;
+        private readonly IOrderData orderDb;
+        private readonly IPartData partDb;
+        private readonly IPartsListData partsListDb;
+        private readonly IStatusData statusDb;
 
-        public OrderController(ICustomerData customerDb, IEmployeeData employeeDb, IImageListData imageListDb, IOrderData orderDb, IPartData partDb, IPartsListData partsListDb, IStatusData statusDb)
+        public OrderController(ICustomerData customerDb, IEmployeeData employeeDb, IImageData imageListDb, IOrderData orderDb, IPartData partDb, IPartsListData partsListDb, IStatusData statusDb)
         {
             this.customerDb = customerDb;
             this.employeeDb = employeeDb;
@@ -40,7 +40,7 @@ namespace ComputerReparatieshop.Web.Controllers
 
             foreach(Status status in statuses)
             {
-                modelStatus.Add(new Order_Index_Status { Id = status.Id, Status = status.StatusDescription, StatusColour = status.Colour, Amount = 0 });
+                modelStatus.Add(new Order_Index_Status { Id = status.Id, Status = status.StatusDescription, StatusColour = status.StatusColour, Amount = 0 });
             }
 
             foreach (Order order in orders)
@@ -164,12 +164,18 @@ namespace ComputerReparatieshop.Web.Controllers
         private Order_Detail GetOrderDetail(Order order)
         {
             var status = statusDb.Get(order.StatusId);
-            return new Order_Detail { Id = order.Id, EmployeeName = employeeDb.Get(order.EmployeeId).Name, CustomerName = customerDb.Get(order.CustomerId).Name, StartDate = order.StartDate, EndDate = order.EndDate, Discription = order.Discription, Status = status.StatusDescription, StatusColour=status.Colour, ToDo=order.ToDo};
+            return new Order_Detail { Id = order.Id, EmployeeName = employeeDb.Get(order.EmployeeId).Name, CustomerName = customerDb.Get(order.CustomerId).Name, StartDate = order.StartDate, EndDate = order.EndDate, Discription = order.Discription, Status = status.StatusDescription, StatusColour=status.StatusColour, ToDo=order.ToDo};
         }
 
         private Order_Edit GetOrderEdit(Order order)
         {
             return new Order_Edit { Order = order, Customers = customerDb.GetAll(), Employees = employeeDb.GetAll(), Statuses = statusDb.GetAll() };
+        }
+
+        public  ActionResult Test(int? id)
+        {
+            var model = orderDb.GetAll();
+            return View(model);
         }
     }
 }

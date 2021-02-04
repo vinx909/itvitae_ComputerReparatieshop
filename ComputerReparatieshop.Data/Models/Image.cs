@@ -2,15 +2,13 @@
 
 namespace ComputerReparatieshop.Data.Models
 {
-    public class Status
+    public class Image
     {
         [Required]
         public int Id { get; set; }
         [Required]
-        [MaxLength(50)]
-        public string StatusDescription { get; set; }
+        public byte[] ImagePath { get; set; }
         [Required]
-        [MaxLength(7)]
-        public string StatusColour { get; set; }
+        public int OrderId { get; set; }
     }
 }

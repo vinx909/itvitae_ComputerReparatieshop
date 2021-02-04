@@ -7,19 +7,19 @@ using ComputerReparatieshop.Data.Models;
 
 namespace ComputerReparatieshop.Data.Services
 {
-    public class InMemoryImageListData : IImageListData
+    public class InMemoryImageData : IImageData
     {
-        private List<ImageList> imageLists;
+        private List<Image> imageLists;
 
-        public InMemoryImageListData()
+        public InMemoryImageData()
         {
-            imageLists = new List<ImageList>();
+            imageLists = new List<Image>();
         }
 
-        public IEnumerable<ImageList> Get(int id)
+        public IEnumerable<Image> Get(int id)
         {
-            List<ImageList> returningList = new List<ImageList>();
-            foreach(ImageList image in imageLists)
+            List<Image> returningList = new List<Image>();
+            foreach(Image image in imageLists)
             {
                 if (image.Id == id)
                 {
@@ -29,7 +29,7 @@ namespace ComputerReparatieshop.Data.Services
             return returningList;
         }
 
-        public IEnumerable<ImageList> GetAll()
+        public IEnumerable<Image> GetAll()
         {
             return imageLists;
         }
