@@ -15,7 +15,7 @@ namespace ComputerReparatieshop.Web
         {
             var builder = new ContainerBuilder();
 
-            /*
+            ///*
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<ComputerReparatieshopDbContext>().InstancePerRequest();
             builder.RegisterType<SqlCustomerData>().As<ICustomerData>().InstancePerHttpRequest();
@@ -25,9 +25,9 @@ namespace ComputerReparatieshop.Web
             builder.RegisterType<SqlPartData>().As<IPartData>().InstancePerHttpRequest();
             builder.RegisterType<SqlPartsListData>().As<IPartsListData>().InstancePerHttpRequest();
             builder.RegisterType<SqlStatusData>().As<IStatusData>().InstancePerHttpRequest();
-            */
+            //*/
 
-            ///*
+            /*
             builder.RegisterType<InMemoryCustomerData>().As<ICustomerData>().SingleInstance();
             builder.RegisterType<InMemoryEmployeeData>().As<IEmployeeData>().SingleInstance();
             builder.RegisterType<InMemoryImageData>().As<IImageData>().SingleInstance();
@@ -35,7 +35,7 @@ namespace ComputerReparatieshop.Web
             builder.RegisterType<InMemoryPartData>().As<IPartData>().SingleInstance();
             builder.RegisterType<InMemoryPartsListData>().As<IPartsListData>().SingleInstance();
             builder.RegisterType<InMemoryStatusData>().As<IStatusData>().SingleInstance();
-             //*/
+            */
 
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
