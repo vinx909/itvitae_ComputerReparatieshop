@@ -21,6 +21,21 @@ namespace ComputerReparatieshop.Data.Services
             };
         }
 
+        public void Create(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
         public Customer Get(int id)
         {
             return customers.Find(c => c.Id == id);

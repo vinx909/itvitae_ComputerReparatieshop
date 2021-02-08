@@ -16,6 +16,25 @@ namespace ComputerReparatieshop.Data.Services
             this.db = db;
         }
 
+        public void Create(Employee employee)
+        {
+            db.Employees.Add(employee);
+            db.SaveChanges();
+        }
+
+        public void Delete(Employee employee)
+        {
+            db.Employees.Remove(employee);
+            db.SaveChanges();
+        }
+
+        public void Edit(Employee employee)
+        {
+            var entry = db.Entry(employee);
+            entry.State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+        }
+
         public Employee Get(int id)
         {
             return db.Employees.Find(id);

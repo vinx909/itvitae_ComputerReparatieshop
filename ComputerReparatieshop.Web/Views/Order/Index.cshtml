@@ -34,7 +34,7 @@
         }
     </table>
 
-@{ ComputerReparatieshop.Web.Models.Order_Detail dummyOrder = Model.orders.FirstOrDefault();}
+@{ ComputerReparatieshop.Web.Models.Order_Detail dummyOrder = Model.Orders.FirstOrDefault();}
 <table class="table">
     <tr>
         <th>
@@ -58,7 +58,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model.orders)
+    @foreach (var item in Model.Orders)
     {
         <tr style="background-color: @item.StatusColour;">
             <td>

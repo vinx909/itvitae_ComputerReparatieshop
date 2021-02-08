@@ -21,6 +21,21 @@ namespace ComputerReparatieshop.Data.Services
             };
         }
 
+        public void Create(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
         public Employee Get(int id)
         {
             return employees.Find(e => e.Id == id);

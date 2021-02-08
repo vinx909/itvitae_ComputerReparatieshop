@@ -31,7 +31,7 @@ GO
 CREATE TABLE [dbo].[Employees](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [varchar](50) NOT NULL,
-	[PayPerHour] [decimal](18, 0) NOT NULL,
+	[PayPerHour] [decimal](16, 2) NOT NULL,
 	CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED (
 		[Id] ASC
 	) WITH (

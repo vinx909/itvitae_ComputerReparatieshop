@@ -6,10 +6,10 @@ VALUES  (0, 'Tim F' ),
         (0, 'Jeroen H');
 
 INSERT INTO Employees (Name,PayPerHour)
-Values  ('Bob J', 1600 ),
-        ('James E', 2700 ),
-        ('Emma T', 599 ),
-        ('Tim W', 4500);
+Values  ('Bob J', 16 ),
+        ('James E', 27 ),
+        ('Emma T', 5.99 ),
+        ('Tim W', 45);
 
 INSERT INTO Status (StatusDescription, StatusColour)
 VALUES  ('in afwachting', '#FF8888'),

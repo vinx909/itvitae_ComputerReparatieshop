@@ -26,14 +26,29 @@ namespace ComputerReparatieshop.Data.Services
         {
             order.ToDo = false;
             Edit(order);
-            //db.Orders.Remove(order);
         }
 
         public void Edit(Order order)
         {
-            var entry = db.Entry(order);
-            entry.State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+            try
+            {
+                var entry2 = db.Entry(order);
+                entry2.State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch(InvalidOperationException)
+            {
+                Order toEdit = db.Orders.Find(order.Id);
+                var entry = db.Entry(toEdit);
+                entry.State = System.Data.Entity.EntityState.Modified;
+                toEdit.CustomerId = order.CustomerId;
+                toEdit.Description = order.Description;
+                toEdit.EmployeeId = order.EmployeeId;
+                toEdit.EndDate = order.EndDate;
+                toEdit.StartDate = order.StartDate;
+                toEdit.StatusId = order.StatusId;
+                db.SaveChanges();
+            }
         }
 
         public Order Get(int id)

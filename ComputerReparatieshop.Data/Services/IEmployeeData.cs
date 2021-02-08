@@ -7,5 +7,8 @@ namespace ComputerReparatieshop.Data.Services
     {
         IEnumerable<Employee> GetAll();
         Employee Get(int id);
+        void Create(Employee employee);
+        void Edit(Employee employee);
+        void Delete(Employee employee);
     }
 }
