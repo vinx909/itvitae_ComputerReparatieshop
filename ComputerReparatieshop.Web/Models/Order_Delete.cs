@@ -1,4 +1,4 @@
-﻿using ComputerReparatieshop.Data.Models;
+﻿using ComputerReparatieshop.Domain.Models;
 
 namespace ComputerReparatieshop.Web.Models
 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ComputerReparatieshop.Data.Models;
+﻿using System.Collections.Generic;
+using ComputerReparatieshop.Domain.Models;
 
 namespace ComputerReparatieshop.Web.Models
 {

@@ -1,10 +1,7 @@
-﻿using System;
+﻿using ComputerReparatieshop.Domain.Models;
+using ComputerReparatieshop.Domain.Services;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using ComputerReparatieshop.Data.Models;
-using ComputerReparatieshop.Data.Services;
 
 namespace ComputerReparatieshop.Web.Controllers
 {
