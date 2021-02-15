@@ -22,17 +22,25 @@ namespace ComputerReparatieshop.Infrastructure.Services
 
         public void Create(Employee employee)
         {
-            throw new NotImplementedException();
+            employees.Add(employee);
         }
 
         public void Delete(Employee employee)
         {
-            throw new NotImplementedException();
+            employees.Remove(employee);
         }
 
         public void Edit(Employee employee)
         {
-            throw new NotImplementedException();
+            foreach(Employee toEdit in employees)
+            {
+                if (toEdit.Id == employee.Id)
+                {
+                    toEdit.Name = employee.Name;
+                    toEdit.PayPerHour = toEdit.PayPerHour;
+                    break;
+                }
+            }
         }
 
         public Employee Get(int id)

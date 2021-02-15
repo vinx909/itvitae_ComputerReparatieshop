@@ -24,17 +24,25 @@ namespace ComputerReparatieshop.Infrastructure.Services
 
         public void Create(Part part)
         {
-            throw new NotImplementedException();
+            parts.Add(part);
         }
 
         public void Delete(Part part)
         {
-            throw new NotImplementedException();
+            parts.Remove(part);
         }
 
-        public void Edit(Part toEdit)
+        public void Edit(Part part)
         {
-            throw new NotImplementedException();
+            foreach(Part toEdit in parts)
+            {
+                if (toEdit.Id == part.Id)
+                {
+                    toEdit.Name = part.Name;
+                    toEdit.Price = part.Price;
+                    break;
+                }
+            }
         }
 
         public Part Get(int id)
@@ -45,16 +53,6 @@ namespace ComputerReparatieshop.Infrastructure.Services
         public IEnumerable<Part> GetAll()
         {
             return parts.OrderBy(p => p.Name);
-        }
-
-        Part IPartData.Get(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Part> IPartData.GetAll()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -8,12 +8,12 @@ namespace ComputerReparatieshop.Web
 {
     public class ContainerConfig
     {
-        enum InfrastructureOrigin
+        private enum InfrastructureOrigin
         {
             InMemory,
             Sql
         }
-        const InfrastructureOrigin infrastructureOrigin = InfrastructureOrigin.Sql;
+        private const InfrastructureOrigin infrastructureOrigin = InfrastructureOrigin.Sql;
 
         internal static void RegisterContainer()
         {
@@ -25,22 +25,22 @@ namespace ComputerReparatieshop.Web
             {
                 case InfrastructureOrigin.Sql:
                     builder.RegisterType<ComputerReparatieshopDbContext>().InstancePerRequest();
-                    builder.RegisterType<SqlCustomerData>().As<ICustomerData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<SqlEmployeeData>().As<IEmployeeData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<SqlImageData>().As<IImageData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<SqlOrderData>().As<IOrderData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<SqlPartData>().As<IPartData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<SqlPartsListData>().As<IPartsListData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<SqlStatusData>().As<IStatusData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
+                    builder.RegisterType<SqlCustomerData>().As<ICustomerData>().InstancePerRequest();
+                    builder.RegisterType<SqlEmployeeData>().As<IEmployeeData>().InstancePerRequest();
+                    builder.RegisterType<SqlImageData>().As<IImageData>().InstancePerRequest();
+                    builder.RegisterType<SqlOrderData>().As<IOrderData>().InstancePerRequest();
+                    builder.RegisterType<SqlPartData>().As<IPartData>().InstancePerRequest();
+                    builder.RegisterType<SqlPartsListData>().As<IPartsListData>().InstancePerRequest();
+                    builder.RegisterType<SqlStatusData>().As<IStatusData>().InstancePerRequest();
                     break;
                 case InfrastructureOrigin.InMemory:
-                    builder.RegisterType<InMemoryCustomerData>().As<ICustomerData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<InMemoryEmployeeData>().As<IEmployeeData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<InMemoryImageData>().As<IImageData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<InMemoryOrderData>().As<IOrderData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<InMemoryPartData>().As<IPartData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<InMemoryPartsListData>().As<IPartsListData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
-                    builder.RegisterType<InMemoryStatusData>().As<IStatusData>().InstancePerRequest();/*.InstancePerHttpRequest()*/
+                    builder.RegisterType<InMemoryCustomerData>().As<ICustomerData>().SingleInstance();
+                    builder.RegisterType<InMemoryEmployeeData>().As<IEmployeeData>().SingleInstance();
+                    builder.RegisterType<InMemoryImageData>().As<IImageData>().SingleInstance();
+                    builder.RegisterType<InMemoryOrderData>().As<IOrderData>().SingleInstance();
+                    builder.RegisterType<InMemoryPartData>().As<IPartData>().SingleInstance();
+                    builder.RegisterType<InMemoryPartsListData>().As<IPartsListData>().SingleInstance();
+                    builder.RegisterType<InMemoryStatusData>().As<IStatusData>().SingleInstance();
                     break;
             }
 

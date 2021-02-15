@@ -30,15 +30,5 @@ namespace ComputerReparatieshop.Infrastructure.Services
         {
             return imageLists;
         }
-
-        IEnumerable<Domain.Models.Image> IImageData.Get(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        IEnumerable<Domain.Models.Image> IImageData.GetAll()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

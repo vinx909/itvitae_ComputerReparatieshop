@@ -8,7 +8,7 @@ namespace ComputerReparatieshop.Infrastructure.Services
 {
     public class InMemoryCustomerData : ICustomerData
     {
-        List<Customer> customers;
+        private readonly List<Customer> customers;
 
         public InMemoryCustomerData()
         {
@@ -22,17 +22,25 @@ namespace ComputerReparatieshop.Infrastructure.Services
 
         public void Create(Customer customer)
         {
-            throw new NotImplementedException();
+            customers.Add(customer);
         }
 
         public void Delete(Customer customer)
         {
-            throw new NotImplementedException();
+            customers.Remove(customer);
         }
 
         public void Edit(Customer customer)
         {
-            throw new NotImplementedException();
+            foreach (Customer toEdit in customers)
+            {
+                if (toEdit.Id == customer.Id)
+                {
+                    toEdit.Name = customer.Name;
+                    toEdit.Auth = customer.Auth;
+                    break;
+                }
+            }
         }
 
         public Customer Get(int id)

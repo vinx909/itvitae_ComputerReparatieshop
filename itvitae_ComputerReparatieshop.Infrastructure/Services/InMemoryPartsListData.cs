@@ -2,39 +2,54 @@
 using ComputerReparatieshop.Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ComputerReparatieshop.Infrastructure.Services
 {
     public class InMemoryPartsListData : IPartsListData
     {
+        List<PartsList> partsLists;
+
+        public InMemoryPartsListData()
+        {
+            partsLists = new List<PartsList>();
+        }
+
         public void Create(PartsList partsList)
         {
-            throw new NotImplementedException();
+            partsLists.Add(partsList);
         }
 
         public void Delete(PartsList partsList)
         {
-            throw new NotImplementedException();
+            partsLists.Remove(partsList);
         }
 
         public void Edit(PartsList partsList)
         {
-            throw new NotImplementedException();
+            foreach(PartsList toEdit in partsLists)
+            {
+                if (toEdit.OrderId == partsList.OrderId && toEdit.PartId == partsList.PartId)
+                {
+                    toEdit.Amount = partsList.Amount;
+                    break;
+                }
+            }
         }
 
         public PartsList Get(int orderId, int partId)
         {
-            throw new NotImplementedException();
+            return partsLists.SingleOrDefault(p => p.OrderId == orderId && p.PartId == partId);
         }
 
         public IEnumerable<PartsList> GetAll()
         {
-            throw new NotImplementedException();
+            return partsLists;
         }
 
         IEnumerable<PartsList> IPartsListData.Get(int id)
         {
-            throw new NotImplementedException();
+            return partsLists.Where(p => p.OrderId==id);
         }
     }
 }
