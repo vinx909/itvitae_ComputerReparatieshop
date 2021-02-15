@@ -23,6 +23,10 @@ namespace ComputerReparatieshop.Data.Models
         [MaxLength(1000)]
         public string Description { get; set; }
         [Required]
+        [RegularExpression(@"^[0-9]{1,16}([.,][0-9]{1,3})?$")]
+        [Range(0, 9999999999999999.99)]
+        public Decimal HoursWorked { get; set; }
+        [Required]
         public bool ToDo { get; set; }
     }
 }

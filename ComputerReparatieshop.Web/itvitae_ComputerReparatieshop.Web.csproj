@@ -159,15 +159,20 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
-    <Compile Include="Models\Employee_Create_Returner.cs" />
+    <Compile Include="Controllers\PartController.cs" />
+    <Compile Include="Models\Employee_Returner.cs" />
     <Compile Include="Models\Order_Delete.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Order_Detail_Parts.cs" />
     <Compile Include="Models\Order_Index.cs" />
     <Compile Include="Models\Order_Edit.cs" />
     <Compile Include="Models\Order_Detail.cs" />
     <Compile Include="Models\Order_Index_Status.cs" />
+    <Compile Include="Models\PartsList_Create.cs" />
+    <Compile Include="Models\PartsList_Detail.cs" />
+    <Compile Include="Models\Part_Returner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +225,17 @@
     <Content Include="Views\Employee\Index.cshtml" />
     <Content Include="Views\Employee\Details.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
+    <Content Include="Views\Order\todelete.cshtml" />
+    <Content Include="Views\Order\DetailsPartList.cshtml" />
+    <Content Include="Views\Order\EditPartList.cshtml" />
+    <Content Include="Views\Order\CreatePart.cshtml" />
+    <Content Include="Views\Order\DeletePartList.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Part\Index.cshtml" />
+    <Content Include="Views\Part\Details.cshtml" />
+    <Content Include="Views\Part\Create.cshtml" />
+    <Content Include="Views\Part\Edit.cshtml" />
+    <Content Include="Views\Part\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

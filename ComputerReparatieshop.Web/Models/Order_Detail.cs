@@ -15,6 +15,7 @@ namespace ComputerReparatieshop.Web.Models
         public string Status { get; set; }
         public string StatusColour { get; set; }
         public string Description { get; set; }
-        public bool ToDo { get; set; }
+        public decimal HoursWorked { get; set; }
+        //public bool ToDo { get; set; }
     }
 }

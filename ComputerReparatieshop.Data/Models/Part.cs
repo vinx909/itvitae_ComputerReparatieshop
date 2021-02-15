@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ComputerReparatieshop.Data.Models
 {
@@ -7,7 +8,9 @@ namespace ComputerReparatieshop.Data.Models
         [Required]
         public int Id { get; set; }
         [Required]
-        public int Price { get; set; }
+        [RegularExpression(@"^[0-9]{1,16}([,][0-9]{1,3})?$")]
+        [Range(0, 9999999999999999.99)]
+        public Decimal Price { get; set; }
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }

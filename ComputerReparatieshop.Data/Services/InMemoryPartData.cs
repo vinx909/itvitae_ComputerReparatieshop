@@ -23,6 +23,21 @@ namespace ComputerReparatieshop.Data.Services
             };
         }
 
+        public void Create(Part part)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Part part)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Part toEdit)
+        {
+            throw new NotImplementedException();
+        }
+
         public Part Get(int id)
         {
             return parts.Find(p => p.Id == id);

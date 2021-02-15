@@ -1,53 +1,53 @@
-﻿using System;
+﻿using ComputerReparatieshop.Data.Models;
+using ComputerReparatieshop.Data.Services;
+using ComputerReparatieshop.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using ComputerReparatieshop.Data.Models;
-using ComputerReparatieshop.Data.Services;
-using ComputerReparatieshop.Web.Models;
 
 namespace ComputerReparatieshop.Web.Controllers
 {
-    public class EmployeeController : Controller
+    public class PartController : Controller
     {
-        IEmployeeData db;
+        private readonly IPartData db;
 
-        public EmployeeController(IEmployeeData db)
+        public PartController(IPartData db)
         {
             this.db = db;
         }
 
-        // GET: Employee
+        // GET: Part
         public ActionResult Index()
         {
-            IEnumerable<Employee> model = db.GetAll();
-            return View(model); ;
+            IEnumerable<Part> model = db.GetAll();
+            return View(model);
         }
 
-        // GET: Employee/Details/5
+        // GET: Part/Details/5
         public ActionResult Details(int id)
         {
-            Employee model = db.Get(id);
+            Part model = db.Get(id);
             return View(model);
         }
 
-        // GET: Employee/Create
+        // GET: Part/Create
         public ActionResult Create()
         {
-            Employee model = new Employee();
+            Part model = new Part();
             return View(model);
         }
 
-        // POST: Employee/Create
+        // POST: Part/Create
         [HttpPost]
-        public ActionResult Create(Employee_Returner employee)
+        public ActionResult Create(Part_Returner part)
         {
-            Employee toCreate = null;
+            Part toCreate = null;
             try
             {
                 // TODO: Add insert logic here
-                toCreate = new Employee { Name = employee.Name, PayPerHour = Decimal.Parse(employee.PayPerHour.Replace(".", ",")) };
+                toCreate = new Part { Id = part.Id, Name = part.name, Price = Decimal.Parse(part.price.Replace(".", ",")) };
                 db.Create(toCreate);
                 return RedirectToAction("Index");
             }
@@ -57,22 +57,21 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Employee/Edit/5
+        // GET: Part/Edit/5
         public ActionResult Edit(int id)
         {
-            Employee model = db.Get(id);
+            Part model = db.Get(id);
             return View(model);
         }
 
-        // POST: Employee/Edit/5
+        // POST: Part/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Employee_Returner employee)
+        public ActionResult Edit(int id, Part_Returner part)
         {
-            Employee toEdit = null;
+            Part toEdit = null;
             try
             {
-                // TODO: Add update logic here
-                toEdit = new Employee {Id = id, Name = employee.Name, PayPerHour = Decimal.Parse(employee.PayPerHour.Replace(".",",")) };
+                toEdit = new Part { Id = part.Id, Name = part.name, Price = Decimal.Parse(part.price.Replace(".", ",")) };
                 db.Edit(toEdit);
                 return RedirectToAction("Index");
             }
@@ -82,22 +81,22 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Employee/Delete/5
+        // GET: Part/Delete/5
         public ActionResult Delete(int id)
         {
-            Employee model = db.Get(id);
+            Part model = db.Get(id);
             return View(model);
         }
 
-        // POST: Employee/Delete/5
+        // POST: Part/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
-                Employee employee = db.Get(id);
-                db.Delete(employee);
+                Part part = db.Get(id);
+                db.Delete(part);
                 return RedirectToAction("Index");
             }
             catch

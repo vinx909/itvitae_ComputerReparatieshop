@@ -1,0 +1,43 @@
+﻿@model ComputerReparatieshop.Web.Models.PartsList_Detail
+
+@{
+    ViewBag.Title = "DetailsPartList";
+}
+
+<h2>DetailsPartList</h2>
+
+<div>
+    <h4>PartsList_Detail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditPartList", new { Id = Model.OrderId, partId = Model.PartId }) |
+    @Html.ActionLink("Back to Order", "Details", new { Id = Model.OrderId })
+</p>

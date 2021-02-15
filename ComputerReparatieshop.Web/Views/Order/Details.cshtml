@@ -1,4 +1,4 @@
-﻿@model ComputerReparatieshop.Web.Models.Order_Detail
+﻿@model ComputerReparatieshop.Web.Models.Order_Detail_Parts
 
 @{
     ViewBag.Title = "Details";
@@ -11,56 +11,111 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.EmployeeName)
+            @Html.DisplayNameFor(model => model.Details.EmployeeName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmployeeName)
+            @Html.DisplayFor(model => model.Details.EmployeeName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CustomerName)
+            @Html.DisplayNameFor(model => model.Details.CustomerName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CustomerName)
+            @Html.DisplayFor(model => model.Details.CustomerName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.Details.StartDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.DisplayFor(model => model.Details.StartDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => model.Details.EndDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EndDate)
+            @Html.DisplayFor(model => model.Details.EndDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.Details.Status)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.Details.Status)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Details.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Details.Description)
         </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details.HoursWorked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details.HoursWorked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <p>
+            @Html.ActionLink("Add New Part", "CreatePart", new { Id = Model.Details.Id })
+        </p>
+        @{ComputerReparatieshop.Web.Models.PartsList_Detail dummy = Model.partsLists.FirstOrDefault();}
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName(nameof(dummy.Name))
+                </th>
+                <th>
+                    @Html.DisplayName(nameof(dummy.Amount))
+                </th>
+                <th>
+                    @Html.DisplayName(nameof(dummy.Price));
+                </th>
+            </tr>
+
+            @foreach (var item in Model.partsLists)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditPartList", new { Id = Model.Details.Id, partId = item.PartId }) |
+                        @Html.ActionLink("Details", "DetailsPartList", new { Id = Model.Details.Id, partId = item.PartId }) |
+                        @Html.ActionLink("Delete", "DeletePartList", new { Id = Model.Details.Id, partId = item.PartId })
+                    </td>
+                </tr>
+            }
+        </table>
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Details.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

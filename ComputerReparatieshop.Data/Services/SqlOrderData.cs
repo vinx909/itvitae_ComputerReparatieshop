@@ -47,6 +47,7 @@ namespace ComputerReparatieshop.Data.Services
                 toEdit.EndDate = order.EndDate;
                 toEdit.StartDate = order.StartDate;
                 toEdit.StatusId = order.StatusId;
+                toEdit.HoursWorked = order.HoursWorked;
                 db.SaveChanges();
             }
         }

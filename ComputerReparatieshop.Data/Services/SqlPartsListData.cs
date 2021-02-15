@@ -15,9 +15,34 @@ namespace ComputerReparatieshop.Data.Services
         {
             this.db = db;
         }
-        public IEnumerable<PartsList> Get(int id)
+
+        public void Create(PartsList partsList)
         {
-            return db.PartsLists.Where(p => p.Id == id);
+            db.PartsLists.Add(partsList);
+            db.SaveChanges();
+        }
+
+        public void Delete(PartsList partsList)
+        {
+            db.PartsLists.Remove(partsList);
+            db.SaveChanges();
+        }
+
+        public void Edit(PartsList partsList)
+        {
+            var entry = db.Entry(partsList);
+            entry.State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public IEnumerable<PartsList> Get(int orderId)
+        {
+            return db.PartsLists.Where(p => p.OrderId == orderId);
+        }
+
+        public PartsList Get(int orderId, int partId)
+        {
+            return db.PartsLists.Find(orderId, partId); ;
         }
 
         public IEnumerable<PartsList> GetAll()
