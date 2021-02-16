@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ComputerReparatieshop.Infrastructure.Services
+namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 {
     public class InMemoryCustomerData : ICustomerData
     {

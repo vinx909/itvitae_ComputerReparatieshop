@@ -254,9 +254,13 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\itvitae_ComputerReparatieshop.Infrastructure\itvitae_ComputerReparatieshop.Infrastructure.csproj">
-      <Project>{c21d8847-bb37-4dd4-9981-97e5069ae094}</Project>
-      <Name>itvitae_ComputerReparatieshop.Infrastructure</Name>
+    <ProjectReference Include="..\itvitae_ComputerReparatieshop.Infrastructure.InMemory\itvitae_ComputerReparatieshop.Infrastructure.InMemory.csproj">
+      <Project>{eaff691a-663d-4814-855e-5a2d7fc15ab0}</Project>
+      <Name>itvitae_ComputerReparatieshop.Infrastructure.InMemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\itvitae_ComputerReparatieshop.Infrastructure.Sql\itvitae_ComputerReparatieshop.Infrastructure.Sql.csproj">
+      <Project>{d1bc6ccf-880a-4ed9-a73d-2da6297ec5a3}</Project>
+      <Name>itvitae_ComputerReparatieshop.Infrastructure.Sql</Name>
     </ProjectReference>
     <ProjectReference Include="..\itvitea_ComputerReparatieshop.Domain\itvitae_ComputerReparatieshop.Domain.csproj">
       <Project>{5adb3930-3cee-40e3-873c-129d4a3dd673}</Project>

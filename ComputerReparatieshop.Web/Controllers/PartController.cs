@@ -47,7 +47,8 @@ namespace ComputerReparatieshop.Web.Controllers
             try
             {
                 // TODO: Add insert logic here
-                toCreate = new Part { Id = part.Id, Name = part.name, Price = Decimal.Parse(part.price.Replace(".", ",")) };
+                toCreate = new Part { Id = part.Id, Name = part.name };
+                toCreate.Price = Decimal.Parse(part.price.Replace(".", ","));
                 db.Create(toCreate);
                 return RedirectToAction("Index");
             }
@@ -71,7 +72,8 @@ namespace ComputerReparatieshop.Web.Controllers
             Part toEdit = null;
             try
             {
-                toEdit = new Part { Id = part.Id, Name = part.name, Price = Decimal.Parse(part.price.Replace(".", ",")) };
+                toEdit = new Part { Id = part.Id, Name = part.name };
+                toEdit.Price = Decimal.Parse(part.price.Replace(".", ","));
                 db.Edit(toEdit);
                 return RedirectToAction("Index");
             }

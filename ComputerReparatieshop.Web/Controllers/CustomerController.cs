@@ -31,7 +31,7 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new Customer());
         }
 
         // POST: Customer/Create

@@ -45,7 +45,8 @@ namespace ComputerReparatieshop.Web.Controllers
             try
             {
                 // TODO: Add insert logic here
-                toCreate = new Employee { Name = employee.Name, PayPerHour = Decimal.Parse(employee.PayPerHour.Replace(".", ",")) };
+                toCreate = new Employee { Name = employee.Name };
+                toCreate.PayPerHour = Decimal.Parse(employee.PayPerHour.Replace(".", ","));
                 db.Create(toCreate);
                 return RedirectToAction("Index");
             }
@@ -58,7 +59,8 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(int id)
         {
-            Employee model = db.Get(id);
+            Employee employee = db.Get(id);
+            Employee_Returner model = getEmployeeReturner(employee);
             return View(model);
         }
 
@@ -70,7 +72,8 @@ namespace ComputerReparatieshop.Web.Controllers
             try
             {
                 // TODO: Add update logic here
-                toEdit = new Employee {Id = id, Name = employee.Name, PayPerHour = Decimal.Parse(employee.PayPerHour.Replace(".",",")) };
+                toEdit = new Employee { Id = id, Name = employee.Name };
+                toEdit.PayPerHour = Decimal.Parse(employee.PayPerHour.Replace(".",","));
                 db.Edit(toEdit);
                 return RedirectToAction("Index");
             }
@@ -102,6 +105,11 @@ namespace ComputerReparatieshop.Web.Controllers
             {
                 return Delete(id);
             }
+        }
+
+        private Employee_Returner getEmployeeReturner(Employee employee)
+        {
+            return new Employee_Returner { Name = employee.Name, PayPerHour = (""+employee.PayPerHour).Replace(",",".") };
         }
     }
 }

@@ -2,7 +2,8 @@
 using Autofac;
 using Autofac.Integration.Mvc;
 using ComputerReparatieshop.Domain.Services;
-using ComputerReparatieshop.Infrastructure.Services;
+using ComputerReparatieshop.Infrastructure.InMemory.Services;
+using ComputerReparatieshop.Infrastructure.Sql.Services;
 
 namespace ComputerReparatieshop.Web
 {
@@ -13,7 +14,7 @@ namespace ComputerReparatieshop.Web
             InMemory,
             Sql
         }
-        private const InfrastructureOrigin infrastructureOrigin = InfrastructureOrigin.Sql;
+        private const InfrastructureOrigin infrastructureOrigin = InfrastructureOrigin.InMemory;
 
         internal static void RegisterContainer()
         {

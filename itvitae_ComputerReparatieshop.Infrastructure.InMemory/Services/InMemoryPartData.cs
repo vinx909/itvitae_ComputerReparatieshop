@@ -4,7 +4,7 @@ using System.Linq;
 using ComputerReparatieshop.Domain.Models;
 using ComputerReparatieshop.Domain.Services;
 
-namespace ComputerReparatieshop.Infrastructure.Services
+namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 {
     public class InMemoryPartData : IPartData
     {
@@ -14,11 +14,11 @@ namespace ComputerReparatieshop.Infrastructure.Services
         {
             parts = new List<Part>()
             {
-                new Part { Id = 0, Name = "Mouse", Price = 2400 },
-                new Part { Id = 1, Name = "Keyboard", Price = 2800 },
-                new Part { Id = 2, Name = "Screen", Price = 9900 },
-                new Part { Id = 3, Name = "CPU", Price = 13400 },
-                new Part { Id = 4, Name = "GPU", Price = 108000 }
+                new Part { Id = 0, Name = "Mouse", Price = 24.00M },
+                new Part { Id = 1, Name = "Keyboard", Price = 28.00M },
+                new Part { Id = 2, Name = "Screen", Price = 99.00M },
+                new Part { Id = 3, Name = "CPU", Price = 134.00M },
+                new Part { Id = 4, Name = "GPU", Price = 1080.00M }
             };
         }
 

@@ -1,4 +1,4 @@
-﻿@model ComputerReparatieshop.Domain.Models.Employee
+﻿@model ComputerReparatieshop.Web.Models.Employee_Returner
 
 @{
     ViewBag.Title = "Edit";
@@ -15,7 +15,7 @@
         <h4>Employee</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
