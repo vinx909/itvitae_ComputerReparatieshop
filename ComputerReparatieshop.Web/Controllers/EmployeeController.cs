@@ -9,6 +9,7 @@ namespace ComputerReparatieshop.Web.Controllers
 {
     public class EmployeeController : Controller
     {
+        private const string ViewNameNotFound = "notFound";
         private readonly IEmployeeData db;
 
         public EmployeeController(IEmployeeData db)
@@ -27,6 +28,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Details(int id)
         {
             Employee model = db.Get(id);
+            if (model == null)
+            {
+                return View(ViewNameNotFound);
+            }
             return View(model);
         }
 
@@ -60,6 +65,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Edit(int id)
         {
             Employee employee = db.Get(id);
+            if (employee == null)
+            {
+                return View(ViewNameNotFound);
+            }
             Employee_Returner model = GetEmployeeReturner(employee);
             return View(model);
         }
@@ -87,6 +96,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Delete(int id)
         {
             Employee model = db.Get(id);
+            if (model == null)
+            {
+                return View(ViewNameNotFound);
+            }
             return View(model);
         }
 

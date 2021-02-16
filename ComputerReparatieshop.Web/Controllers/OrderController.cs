@@ -14,7 +14,11 @@ namespace ComputerReparatieshop.Web.Controllers
         private const string starDateChangedColour = "#FF0000";
         private const int createdOrderStatusId = 1;
         private const bool createdOrderToDO = true;
-
+        private const string ViewNameNotFound = "notFound";
+        private const string ViewNamePartNotFound = "partNotFound";
+        private const string ActionNameIndex = "Index";
+        private const string ActionNameIndexWithId = "Index/";
+        private const string ActionNameDetails = "Details/";
         private readonly ICustomerData customerDb;
         private readonly IEmployeeData employeeDb;
         private readonly IImageData imageListDb;
@@ -72,6 +76,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Details(int id)
         {
             Order order = orderDb.Get(id);
+            if (order == null)
+            {
+                return View(ViewNameNotFound);
+            }
             Employee employee = employeeDb.Get(order.EmployeeId);
             Order_Detail detail = GetOrderDetail(order, employee.Name);
             IEnumerable<PartsList_Detail> partsListDetails = GetPartListsDetails(id);
@@ -103,7 +111,7 @@ namespace ComputerReparatieshop.Web.Controllers
 
                 order.ToDo = true;
 
-                return RedirectToAction("Index");
+                return RedirectToAction(ActionNameIndex);
             }
             catch
             {
@@ -117,11 +125,11 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Edit(int id)
         {
             Order order = orderDb.Get(id);
-            Order_Edit model = GetOrderEdit(order);
-            if (model.Order == null)
+            if (order == null)
             {
-                return View("notFound");
+                return View(ViewNameNotFound);
             }
+            Order_Edit model = GetOrderEdit(order);
             return View(model);
         }
 
@@ -136,11 +144,11 @@ namespace ComputerReparatieshop.Web.Controllers
                 orderDb.Edit(order);
                 if (order.StartDate == oldStartDate)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction(ActionNameIndex);
                 }
                 else
                 {
-                    return RedirectToAction("Index/" + id);
+                    return RedirectToAction(ActionNameIndexWithId + id);
                 }
             }
             catch
@@ -155,7 +163,13 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            Order_Detail model = GetOrderDetail(orderDb.Get(id));
+            Order order = orderDb.Get(id);
+            if (order == null)
+            {
+                return View(ViewNameNotFound);
+            }
+            Order_Detail model = GetOrderDetail(order);
+
             return View(model);
         }
 
@@ -167,7 +181,7 @@ namespace ComputerReparatieshop.Web.Controllers
             {
                 Order order = orderDb.Get(id);
                 orderDb.Delete(order);
-                return RedirectToAction("Index");
+                return RedirectToAction(ActionNameIndex);
             }
             catch
             {
@@ -179,6 +193,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult DetailsPartList(int id, int partId)
         {
             PartsList partsList = partsListDb.Get(id, partId);
+            if (partsList == null)
+            {
+                return View(ViewNamePartNotFound, id);
+            }
             PartsList_Detail model = GetPartListDetail(partsList);
             return View(model);
         }
@@ -187,6 +205,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult EditPartList(int id, int partId)
         {
             PartsList model = partsListDb.Get(id, partId);
+            if (model == null)
+            {
+                return View(ViewNamePartNotFound, id);
+            }
             return View(model);
         }
         [HttpPost]
@@ -195,7 +217,7 @@ namespace ComputerReparatieshop.Web.Controllers
             try
             {
                 partsListDb.Edit(partsList);
-                return RedirectToAction("Details/" + id);
+                return RedirectToAction(ActionNameDetails + id);
             }
             catch
             {
@@ -217,7 +239,7 @@ namespace ComputerReparatieshop.Web.Controllers
             {
                 partsList.WorkingOn.OrderId = id;
                 partsListDb.Create(partsList.WorkingOn);
-                return RedirectToAction("Details/" + id);
+                return RedirectToAction(ActionNameDetails + id);
             }
             catch
             {
@@ -229,6 +251,10 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult DeletePartList(int id, int partId){
             PartsList partsList = partsListDb.Get(id, partId);
+            if (partsList == null)
+            {
+                return View(ViewNamePartNotFound, id);
+            }
             PartsList_Detail model = GetPartListDetail(partsList);
             return View(model);
         }
@@ -238,7 +264,7 @@ namespace ComputerReparatieshop.Web.Controllers
             try
             {
                 partsListDb.Delete(partsListDb.Get(id, partId));
-                return RedirectToAction("Details/" + id);
+                return RedirectToAction(ActionNameDetails + id);
             }
             catch
             {

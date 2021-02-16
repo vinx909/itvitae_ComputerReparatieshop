@@ -11,6 +11,7 @@ namespace ComputerReparatieshop.Web.Controllers
 {
     public class PartController : Controller
     {
+        private const string ViewNameNotFound = "notFound";
         private readonly IPartData db;
 
         public PartController(IPartData db)
@@ -29,6 +30,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Details(int id)
         {
             Part model = db.Get(id);
+            if (model == null)
+            {
+                return View(ViewNameNotFound);
+            }
             return View(model);
         }
 
@@ -62,6 +67,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Edit(int id)
         {
             Part model = db.Get(id);
+            if (model == null)
+            {
+                return View(ViewNameNotFound);
+            }
             return View(model);
         }
 
@@ -87,6 +96,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Delete(int id)
         {
             Part model = db.Get(id);
+            if (model == null)
+            {
+                return View(ViewNameNotFound);
+            }
             return View(model);
         }
 

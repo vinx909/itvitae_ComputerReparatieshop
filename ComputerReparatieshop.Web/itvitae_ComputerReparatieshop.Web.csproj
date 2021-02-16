@@ -236,6 +236,10 @@
     <Content Include="Views\Part\Create.cshtml" />
     <Content Include="Views\Part\Edit.cshtml" />
     <Content Include="Views\Part\Delete.cshtml" />
+    <Content Include="Views\Order\partNotFound.cshtml" />
+    <Content Include="Views\Customer\notFound.cshtml" />
+    <Content Include="Views\Part\notFound.cshtml" />
+    <Content Include="Views\Employee\notFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

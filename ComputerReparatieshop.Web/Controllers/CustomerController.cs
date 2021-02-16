@@ -7,6 +7,7 @@ namespace ComputerReparatieshop.Web.Controllers
 {
     public class CustomerController : Controller
     {
+        private const string ViewNameNotFound = "notFound";
         private readonly ICustomerData db;
 
         public CustomerController(ICustomerData db)
@@ -25,6 +26,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Details(int id)
         {
             Customer model = db.Get(id);
+            if(model == null)
+            {
+                return View(ViewNameNotFound);
+            }
             return View(model);
         }
 
@@ -56,6 +61,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Edit(int id)
         {
             Customer model = db.Get(id);
+            if (model == null)
+            {
+                return View(ViewNameNotFound);
+            }
             return View(model);
         }
 
@@ -79,6 +88,10 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Delete(int id)
         {
             Customer model = db.Get(id);
+            if (model == null)
+            {
+                return View(ViewNameNotFound);
+            }
             return View(model);
         }
 
