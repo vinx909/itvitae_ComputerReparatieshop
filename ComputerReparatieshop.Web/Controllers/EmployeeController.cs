@@ -9,7 +9,7 @@ namespace ComputerReparatieshop.Web.Controllers
 {
     public class EmployeeController : Controller
     {
-        IEmployeeData db;
+        private readonly IEmployeeData db;
 
         public EmployeeController(IEmployeeData db)
         {
@@ -60,7 +60,7 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Edit(int id)
         {
             Employee employee = db.Get(id);
-            Employee_Returner model = getEmployeeReturner(employee);
+            Employee_Returner model = GetEmployeeReturner(employee);
             return View(model);
         }
 
@@ -107,7 +107,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        private Employee_Returner getEmployeeReturner(Employee employee)
+        private Employee_Returner GetEmployeeReturner(Employee employee)
         {
             return new Employee_Returner { Name = employee.Name, PayPerHour = (""+employee.PayPerHour).Replace(",",".") };
         }

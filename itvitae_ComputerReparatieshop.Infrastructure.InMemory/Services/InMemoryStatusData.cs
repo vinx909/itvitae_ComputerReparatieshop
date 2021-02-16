@@ -6,7 +6,7 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 {
     public class InMemoryStatusData : IStatusData
     {
-        private List<Status> statuses;
+        private readonly List<Status> statuses;
 
         public InMemoryStatusData()
         {

@@ -6,7 +6,7 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 {
     public class InMemoryImageData : IImageData
     {
-        private List<Image> imageLists;
+        private readonly List<Image> imageLists;
 
         public InMemoryImageData()
         {

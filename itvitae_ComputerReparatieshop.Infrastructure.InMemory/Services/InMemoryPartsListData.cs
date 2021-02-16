@@ -8,7 +8,7 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 {
     public class InMemoryPartsListData : IPartsListData
     {
-        List<PartsList> partsLists;
+        private readonly List<PartsList> partsLists;
 
         public InMemoryPartsListData()
         {

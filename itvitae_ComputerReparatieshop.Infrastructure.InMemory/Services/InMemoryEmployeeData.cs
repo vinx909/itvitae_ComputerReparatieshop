@@ -8,7 +8,7 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 {
     public class InMemoryEmployeeData : IEmployeeData
     {
-        List<Employee> employees;
+        private readonly List<Employee> employees;
 
         public InMemoryEmployeeData()
         {

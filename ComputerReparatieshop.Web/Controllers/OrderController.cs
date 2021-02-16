@@ -48,7 +48,7 @@ namespace ComputerReparatieshop.Web.Controllers
 
             foreach (Order order in orders)
             {
-                Order_Detail newOrderDetail = getOrderDetail(order);
+                Order_Detail newOrderDetail = GetOrderDetail(order);
                 for (int i = 0; i < modelStatus.Count; i++)
                 {
                     if (order.StatusId == modelStatus[i].Id)
@@ -73,10 +73,10 @@ namespace ComputerReparatieshop.Web.Controllers
         {
             Order order = orderDb.Get(id);
             Employee employee = employeeDb.Get(order.EmployeeId);
-            Order_Detail detail = getOrderDetail(order, employee.Name);
-            IEnumerable<PartsList_Detail> partsListDetails = getPartListsDetails(id);
+            Order_Detail detail = GetOrderDetail(order, employee.Name);
+            IEnumerable<PartsList_Detail> partsListDetails = GetPartListsDetails(id);
 
-            Order_Detail_Parts model = new Order_Detail_Parts { Details = detail, partsLists = partsListDetails, EmployeePayPerHour =  employee.PayPerHour};
+            Order_Detail_Parts model = new Order_Detail_Parts { Details = detail, PartsLists = partsListDetails, EmployeePayPerHour =  employee.PayPerHour};
 
             return View(model);
         }
@@ -85,7 +85,7 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Order/Create
         public ActionResult Create()
         {
-            Order_Edit model = getOrderEdit(new Order());
+            Order_Edit model = GetOrderEdit(new Order());
 
             return View(model);
         }
@@ -107,7 +107,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             catch
             {
-                Order_Edit model = getOrderEdit(order);
+                Order_Edit model = GetOrderEdit(order);
 
                 return View(model);
             }
@@ -117,7 +117,7 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult Edit(int id)
         {
             Order order = orderDb.Get(id);
-            Order_Edit model = getOrderEdit(order);
+            Order_Edit model = GetOrderEdit(order);
             if (model.Order == null)
             {
                 return View("notFound");
@@ -145,7 +145,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             catch
             {
-                Order_Edit model = getOrderEdit(order);
+                Order_Edit model = GetOrderEdit(order);
                 return View(model);
             }
         }
@@ -155,7 +155,7 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            Order_Detail model = getOrderDetail(orderDb.Get(id));
+            Order_Detail model = GetOrderDetail(orderDb.Get(id));
             return View(model);
         }
 
@@ -179,7 +179,7 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult DetailsPartList(int id, int partId)
         {
             PartsList partsList = partsListDb.Get(id, partId);
-            PartsList_Detail model = getPartListDetail(partsList);
+            PartsList_Detail model = GetPartListDetail(partsList);
             return View(model);
         }
 
@@ -229,7 +229,7 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult DeletePartList(int id, int partId){
             PartsList partsList = partsListDb.Get(id, partId);
-            PartsList_Detail model = getPartListDetail(partsList);
+            PartsList_Detail model = GetPartListDetail(partsList);
             return View(model);
         }
         //[HttpPost]
@@ -246,38 +246,38 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        private Order_Detail getOrderDetail(Order order)
+        private Order_Detail GetOrderDetail(Order order)
         {
             string employeeName = employeeDb.Get(order.EmployeeId).Name;
-            return getOrderDetail(order, employeeName);
+            return GetOrderDetail(order, employeeName);
         }
-        private Order_Detail getOrderDetail(Order order, string employeeName)
+        private Order_Detail GetOrderDetail(Order order, string employeeName)
         {
             Status status = statusDb.Get(order.StatusId);
             string customerName = customerDb.Get(order.CustomerId).Name;
             return new Order_Detail { Id = order.Id, EmployeeName = employeeName, CustomerName = customerName, StartDate = order.StartDate, EndDate = order.EndDate.GetValueOrDefault(), Description = order.Description, Status = status.StatusDescription, StatusColour = status.StatusColour, HoursWorked = order.HoursWorked };
         }
 
-        private List<PartsList_Detail> getPartListsDetails(int id)
+        private List<PartsList_Detail> GetPartListsDetails(int id)
         {
             IEnumerable<PartsList> partsLists = partsListDb.Get(id);
             List<PartsList_Detail> partsListDetails = new List<PartsList_Detail>();
             foreach (PartsList partsList in partsLists)
             {
-                PartsList_Detail newDetail = getPartListDetail(partsList);
+                PartsList_Detail newDetail = GetPartListDetail(partsList);
                 partsListDetails.Add(newDetail);
             }
             return partsListDetails;
         }
 
-        private PartsList_Detail getPartListDetail(PartsList partsList)
+        private PartsList_Detail GetPartListDetail(PartsList partsList)
         {
             Part part = partDb.Get(partsList.PartId);
             PartsList_Detail newDetail = new PartsList_Detail { OrderId = partsList.OrderId, PartId = partsList.PartId, Name = part.Name, Amount = partsList.Amount, Price = part.Price };
             return newDetail;
         }
 
-        private Order_Edit getOrderEdit(Order order)
+        private Order_Edit GetOrderEdit(Order order)
         {
             return new Order_Edit { Order = order, Customers = customerDb.GetAll(), Employees = employeeDb.GetAll(), Statuses = statusDb.GetAll() };
         }
