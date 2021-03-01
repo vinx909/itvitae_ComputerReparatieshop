@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using ComputerReparatieshop.Domain.Models;
 using ComputerReparatieshop.Domain.Services;
+using ComputerReparatieshop.Web.Exceptions;
 using ComputerReparatieshop.Web.Models;
 
 namespace ComputerReparatieshop.Web.Controllers
@@ -10,6 +11,7 @@ namespace ComputerReparatieshop.Web.Controllers
     public class EmployeeController : Controller
     {
         private const string ViewNameNotFound = "notFound";
+
         private readonly IEmployeeData db;
 
         public EmployeeController(IEmployeeData db)
@@ -44,14 +46,13 @@ namespace ComputerReparatieshop.Web.Controllers
 
         // POST: Employee/Create
         [HttpPost]
-        public ActionResult Create(Employee_Returner employee)
+        public ActionResult Create(Employee_Returner returnedEmployee)
         {
             Employee toCreate = null;
             try
             {
                 // TODO: Add insert logic here
-                toCreate = new Employee { Name = employee.Name };
-                toCreate.PayPerHour = Decimal.Parse(employee.PayPerHour.Replace(".", ","));
+                returnedEmployee.CreateEmployee(ref toCreate);
                 db.Create(toCreate);
                 return RedirectToAction("Index");
             }
@@ -64,25 +65,26 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(int id)
         {
-            Employee employee = db.Get(id);
-            if (employee == null)
+            try
+            {
+                Employee_Returner model = new Employee_Returner(db, id);
+                return View(model);
+            }
+            catch (NotFoundInDatabaseException)
             {
                 return View(ViewNameNotFound);
             }
-            Employee_Returner model = GetEmployeeReturner(employee);
-            return View(model);
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Employee_Returner employee)
+        public ActionResult Edit(int id, Employee_Returner returnedEmployee)
         {
             Employee toEdit = null;
             try
             {
                 // TODO: Add update logic here
-                toEdit = new Employee { Id = id, Name = employee.Name };
-                toEdit.PayPerHour = Decimal.Parse(employee.PayPerHour.Replace(".",","));
+                returnedEmployee.CreateEmployee(id, ref toEdit);
                 db.Edit(toEdit);
                 return RedirectToAction("Index");
             }
@@ -118,11 +120,6 @@ namespace ComputerReparatieshop.Web.Controllers
             {
                 return Delete(id);
             }
-        }
-
-        private Employee_Returner GetEmployeeReturner(Employee employee)
-        {
-            return new Employee_Returner { Name = employee.Name, PayPerHour = (""+employee.PayPerHour).Replace(",",".") };
         }
     }
 }

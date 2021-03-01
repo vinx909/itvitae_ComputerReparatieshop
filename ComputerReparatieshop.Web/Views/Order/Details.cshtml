@@ -75,9 +75,9 @@
         </dd>
 
         <p>
-            @Html.ActionLink("Add New Part", "CreatePart", new { Id = Model.Details.Id })
+            @Html.ActionLink("Add New Part", "CreatePart", new { Id = Model.Details.OrderId })
         </p>
-        @{ComputerReparatieshop.Web.Models.PartsList_Detail dummy = Model.partsLists.FirstOrDefault();}
+        @{ComputerReparatieshop.Web.Models.PartsList_Detail dummy = Model.PartsLists.FirstOrDefault();}
         <table class="table">
             <tr>
                 <th>
@@ -91,7 +91,7 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model.partsLists)
+            @foreach (var item in Model.PartsLists)
             {
                 <tr>
                     <td>
@@ -104,16 +104,16 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "EditPartList", new { Id = Model.Details.Id, partId = item.PartId }) |
-                        @Html.ActionLink("Details", "DetailsPartList", new { Id = Model.Details.Id, partId = item.PartId }) |
-                        @Html.ActionLink("Delete", "DeletePartList", new { Id = Model.Details.Id, partId = item.PartId })
+                        @Html.ActionLink("Edit", "EditPartList", new { Id = Model.Details.OrderId, partId = item.PartId }) |
+                        @Html.ActionLink("Details", "DetailsPartList", new { Id = Model.Details.OrderId, partId = item.PartId }) |
+                        @Html.ActionLink("Delete", "DeletePartList", new { Id = Model.Details.OrderId, partId = item.PartId })
                     </td>
                 </tr>
             }
         </table>
 
         <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Details.Id }) |
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Details.OrderId }) |
             @Html.ActionLink("Back to List", "Index")
         </p>
 

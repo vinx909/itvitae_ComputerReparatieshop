@@ -160,6 +160,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PartController.cs" />
+    <Compile Include="Exceptions\NotFoundInDatabaseException.cs" />
     <Compile Include="Models\Employee_Returner.cs" />
     <Compile Include="Models\Order_Delete.cs" />
     <Compile Include="Global.asax.cs">

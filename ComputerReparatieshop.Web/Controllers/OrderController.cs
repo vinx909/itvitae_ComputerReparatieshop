@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using ComputerReparatieshop.Domain.Models;
 using ComputerReparatieshop.Domain.Services;
+using ComputerReparatieshop.Web.Exceptions;
 using ComputerReparatieshop.Web.Models;
 
 namespace ComputerReparatieshop.Web.Controllers
@@ -19,6 +20,7 @@ namespace ComputerReparatieshop.Web.Controllers
         private const string ActionNameIndex = "Index";
         private const string ActionNameIndexWithId = "Index/";
         private const string ActionNameDetails = "Details/";
+
         private readonly ICustomerData customerDb;
         private readonly IEmployeeData employeeDb;
         private readonly IImageData imageListDb;
@@ -38,62 +40,30 @@ namespace ComputerReparatieshop.Web.Controllers
             this.statusDb = statusDb;
         }
 
-        public ActionResult Index(int? Id)
+        public ActionResult Index(int? id)
         {
-            IEnumerable<Order> orders = orderDb.GetAllToDo();
-            IEnumerable<Status> statuses = statusDb.GetAll();
-            List<Order_Index_Status> modelStatus = new List<Order_Index_Status>();
-            List<Order_Detail> modelOrders = new List<Order_Detail>();
-
-            foreach (Status status in statuses)
-            {
-                modelStatus.Add(new Order_Index_Status { Id = status.Id, Status = status.StatusDescription, StatusColour = status.StatusColour, Amount = 0 });
-            }
-
-            foreach (Order order in orders)
-            {
-                Order_Detail newOrderDetail = GetOrderDetail(order);
-                for (int i = 0; i < modelStatus.Count; i++)
-                {
-                    if (order.StatusId == modelStatus[i].Id)
-                    {
-                        modelStatus[i].Amount++;
-                        break;
-                    }
-                }
-                if (newOrderDetail.Id == Id)
-                {
-                    newOrderDetail.StatusColour = starDateChangedColour;
-                }
-                modelOrders.Add(newOrderDetail);
-            }
-
-            Order_Index model = new Order_Index { AmountPerStatuses = modelStatus, Orders = modelOrders };
+            Order_Index model = new Order_Index(employeeDb, customerDb, orderDb, statusDb, id);
             return View(model);
         }
 
         // GET: Order/Details/5
         public ActionResult Details(int id)
         {
-            Order order = orderDb.Get(id);
-            if (order == null)
+            try
+            {
+                Order_Detail_Parts model = new Order_Detail_Parts(customerDb, employeeDb, orderDb, partDb, partsListDb, statusDb, id);
+                return View(model);
+            }
+            catch (NotFoundInDatabaseException)
             {
                 return View(ViewNameNotFound);
             }
-            Employee employee = employeeDb.Get(order.EmployeeId);
-            Order_Detail detail = GetOrderDetail(order, employee.Name);
-            IEnumerable<PartsList_Detail> partsListDetails = GetPartListsDetails(id);
-
-            Order_Detail_Parts model = new Order_Detail_Parts { Details = detail, PartsLists = partsListDetails, EmployeePayPerHour =  employee.PayPerHour};
-
-            return View(model);
         }
-
 
         // GET: Order/Create
         public ActionResult Create()
         {
-            Order_Edit model = GetOrderEdit(new Order());
+            Order_Edit model = new Order_Edit(customerDb, employeeDb, statusDb, new Order());
 
             return View(model);
         }
@@ -109,13 +79,11 @@ namespace ComputerReparatieshop.Web.Controllers
 
                 orderDb.Create(order);
 
-                order.ToDo = true;
-
                 return RedirectToAction(ActionNameIndex);
             }
             catch
             {
-                Order_Edit model = GetOrderEdit(order);
+                Order_Edit model = new Order_Edit(customerDb, employeeDb, statusDb, order);
 
                 return View(model);
             }
@@ -124,13 +92,15 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Order/Edit/5
         public ActionResult Edit(int id)
         {
-            Order order = orderDb.Get(id);
-            if (order == null)
+            try
+            {
+                Order_Edit model = new Order_Edit(customerDb, employeeDb, statusDb, orderDb, id);
+                return View(model);
+            }
+            catch(NotFoundInDatabaseException)
             {
                 return View(ViewNameNotFound);
             }
-            Order_Edit model = GetOrderEdit(order);
-            return View(model);
         }
 
         // POST: Order/Edit/5
@@ -153,8 +123,15 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             catch
             {
-                Order_Edit model = GetOrderEdit(order);
-                return View(model);
+                try
+                {
+                    Order_Edit model = new Order_Edit(customerDb, employeeDb, statusDb, order); ;
+                    return View(model);
+                }
+                catch (NotFoundInDatabaseException)
+                {
+                    return View(ViewNameNotFound);
+                }
             }
         }
 
@@ -163,14 +140,15 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult Delete(int id)
         {
-            Order order = orderDb.Get(id);
-            if (order == null)
+            try
+            {
+                Order_Detail model = new Order_Detail(employeeDb, customerDb, statusDb, orderDb, id);
+                return View(model);
+            }
+            catch (NotFoundInDatabaseException)
             {
                 return View(ViewNameNotFound);
             }
-            Order_Detail model = GetOrderDetail(order);
-
-            return View(model);
         }
 
         // POST: Order/Delete/5
@@ -192,13 +170,15 @@ namespace ComputerReparatieshop.Web.Controllers
 
         public ActionResult DetailsPartList(int id, int partId)
         {
-            PartsList partsList = partsListDb.Get(id, partId);
-            if (partsList == null)
+            try
+            {
+                PartsList_Detail model = new PartsList_Detail(partsListDb, partDb, id, partId);
+                return View(model);
+            }
+            catch(NotFoundInDatabaseException)
             {
                 return View(ViewNamePartNotFound, id);
             }
-            PartsList_Detail model = GetPartListDetail(partsList);
-            return View(model);
         }
 
         [HttpGet]
@@ -228,8 +208,7 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult CreatePart(int id)
         {
-            IEnumerable<Part> parts = partDb.GetAll();
-            PartsList_Create model = new PartsList_Create { OrderId = id, Parts = parts, WorkingOn = new PartsList { PartId = parts.FirstOrDefault().Id } };
+            PartsList_Create model = new PartsList_Create(id, partDb);
             return View(model);
         }
         [HttpPost]
@@ -250,13 +229,15 @@ namespace ComputerReparatieshop.Web.Controllers
 
         [HttpGet]
         public ActionResult DeletePartList(int id, int partId){
-            PartsList partsList = partsListDb.Get(id, partId);
-            if (partsList == null)
+            try
+            {
+                PartsList_Detail model = new PartsList_Detail(partDb, partsListDb, id, partId);
+                return View(model);
+            }
+            catch(NotFoundInDatabaseException)
             {
                 return View(ViewNamePartNotFound, id);
             }
-            PartsList_Detail model = GetPartListDetail(partsList);
-            return View(model);
         }
         //[HttpPost]
         public ActionResult DeletePartList(int id, int partId, PartsList partsList)
@@ -270,42 +251,6 @@ namespace ComputerReparatieshop.Web.Controllers
             {
                 return DeletePartList(id, partId);
             }
-        }
-
-        private Order_Detail GetOrderDetail(Order order)
-        {
-            string employeeName = employeeDb.Get(order.EmployeeId).Name;
-            return GetOrderDetail(order, employeeName);
-        }
-        private Order_Detail GetOrderDetail(Order order, string employeeName)
-        {
-            Status status = statusDb.Get(order.StatusId);
-            string customerName = customerDb.Get(order.CustomerId).Name;
-            return new Order_Detail { Id = order.Id, EmployeeName = employeeName, CustomerName = customerName, StartDate = order.StartDate, EndDate = order.EndDate.GetValueOrDefault(), Description = order.Description, Status = status.StatusDescription, StatusColour = status.StatusColour, HoursWorked = order.HoursWorked };
-        }
-
-        private List<PartsList_Detail> GetPartListsDetails(int id)
-        {
-            IEnumerable<PartsList> partsLists = partsListDb.Get(id);
-            List<PartsList_Detail> partsListDetails = new List<PartsList_Detail>();
-            foreach (PartsList partsList in partsLists)
-            {
-                PartsList_Detail newDetail = GetPartListDetail(partsList);
-                partsListDetails.Add(newDetail);
-            }
-            return partsListDetails;
-        }
-
-        private PartsList_Detail GetPartListDetail(PartsList partsList)
-        {
-            Part part = partDb.Get(partsList.PartId);
-            PartsList_Detail newDetail = new PartsList_Detail { OrderId = partsList.OrderId, PartId = partsList.PartId, Name = part.Name, Amount = partsList.Amount, Price = part.Price };
-            return newDetail;
-        }
-
-        private Order_Edit GetOrderEdit(Order order)
-        {
-            return new Order_Edit { Order = order, Customers = customerDb.GetAll(), Employees = employeeDb.GetAll(), Statuses = statusDb.GetAll() };
         }
     }
 }

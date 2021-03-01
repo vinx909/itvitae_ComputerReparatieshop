@@ -13,6 +13,6 @@ namespace ComputerReparatieshop.Domain.Models
         public Decimal Price { get; set; }
         [Required]
         [MaxLength(50)]
-        public string Name { get; set; }
+        public string Name { get; set; }\
     }
 }

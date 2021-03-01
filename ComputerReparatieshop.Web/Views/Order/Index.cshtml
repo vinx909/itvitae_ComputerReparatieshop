@@ -58,7 +58,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Orders)
+    @foreach (ComputerReparatieshop.Web.Models.Order_Detail item in Model.Orders)
     {
         <tr style="background-color: @item.StatusColour;">
             <td>
@@ -80,9 +80,9 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.OrderId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.OrderId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.OrderId })
             </td>
         </tr>
     }

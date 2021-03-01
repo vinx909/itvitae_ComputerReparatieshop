@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using ComputerReparatieshop.Domain.Models;
 
 namespace ComputerReparatieshop.Web.Models
 {
@@ -14,5 +15,13 @@ namespace ComputerReparatieshop.Web.Models
         public string Price { get; set; }
         [MaxLength(50)]
         public string Name { get; set; }
+
+        internal void CreatePart(ref Part toCreate)
+        {
+            toCreate = new Part();
+            toCreate.Id = Id;
+            toCreate.Name = Name;
+            toCreate.Price = Decimal.Parse(Price.Replace(".", ","));
+        }
     }
 }

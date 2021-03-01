@@ -8,6 +8,7 @@ namespace ComputerReparatieshop.Web.Controllers
     public class CustomerController : Controller
     {
         private const string ViewNameNotFound = "notFound";
+
         private readonly ICustomerData db;
 
         public CustomerController(ICustomerData db)
