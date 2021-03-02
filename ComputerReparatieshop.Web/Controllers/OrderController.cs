@@ -26,17 +26,17 @@ namespace ComputerReparatieshop.Web.Controllers
         private readonly IImageData imageListDb;
         private readonly IOrderData orderDb;
         private readonly IPartData partDb;
-        private readonly IOrderPartData partsListDb;
+        private readonly IOrderPartData OrderPartDb;
         private readonly IStatusData statusDb;
 
-        public OrderController(ICustomerData customerDb, IEmployeeData employeeDb, IImageData imageListDb, IOrderData orderDb, IPartData partDb, IOrderPartData partsListDb, IStatusData statusDb)
+        public OrderController(ICustomerData customerDb, IEmployeeData employeeDb, IImageData imageListDb, IOrderData orderDb, IPartData partDb, IOrderPartData OrderPartDb, IStatusData statusDb)
         {
             this.customerDb = customerDb;
             this.employeeDb = employeeDb;
             this.imageListDb = imageListDb;
             this.orderDb = orderDb;
             this.partDb = partDb;
-            this.partsListDb = partsListDb;
+            this.OrderPartDb = OrderPartDb;
             this.statusDb = statusDb;
         }
 
@@ -51,7 +51,7 @@ namespace ComputerReparatieshop.Web.Controllers
         {
             try
             {
-                Order_Detail_Parts model = new Order_Detail_Parts(customerDb, employeeDb, orderDb, partDb, partsListDb, statusDb, id);
+                Order_Detail_Parts model = new Order_Detail_Parts(customerDb, employeeDb, orderDb, partDb, OrderPartDb, statusDb, id);
                 return View(model);
             }
             catch (NotFoundInDatabaseException)
@@ -172,7 +172,7 @@ namespace ComputerReparatieshop.Web.Controllers
         {
             try
             {
-                OrderPart_Detail model = new OrderPart_Detail(partsListDb, partDb, id, partId);
+                OrderPart_Detail model = new OrderPart_Detail(OrderPartDb, partDb, id, partId);
                 return View(model);
             }
             catch(NotFoundInDatabaseException)
@@ -184,7 +184,7 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult EditPartList(int id, int partId)
         {
-            OrderPart model = partsListDb.Get(id, partId);
+            OrderPart model = OrderPartDb.Get(id, partId);
             if (model == null)
             {
                 return View(ViewNamePartNotFound, id);
@@ -192,16 +192,16 @@ namespace ComputerReparatieshop.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditPartList(int id, OrderPart partsList)
+        public ActionResult EditPartList(int id, OrderPart OrderPart)
         {
             try
             {
-                partsListDb.Edit(partsList);
+                OrderPartDb.Edit(OrderPart);
                 return RedirectToAction(ActionNameDetails + id);
             }
             catch
             {
-                return View(partsList);
+                return View(OrderPart);
             }
         }
 
@@ -212,18 +212,18 @@ namespace ComputerReparatieshop.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult CreatePart(int id, OrderPart_Create partsList)
+        public ActionResult CreatePart(int id, OrderPart_Create OrderPart)
         {
             try
             {
-                partsList.WorkingOn.OrderId = id;
-                partsListDb.Create(partsList.WorkingOn);
+                OrderPart.WorkingOn.OrderId = id;
+                OrderPartDb.Create(OrderPart.WorkingOn);
                 return RedirectToAction(ActionNameDetails + id);
             }
             catch
             {
-                partsList.Parts = partDb.GetAll();
-                return View(partsList);
+                OrderPart.Parts = partDb.GetAll();
+                return View(OrderPart);
             }
         }
 
@@ -231,7 +231,7 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult DeletePartList(int id, int partId){
             try
             {
-                OrderPart_Detail model = new OrderPart_Detail(partDb, partsListDb, id, partId);
+                OrderPart_Detail model = new OrderPart_Detail(partDb, OrderPartDb, id, partId);
                 return View(model);
             }
             catch(NotFoundInDatabaseException)
@@ -240,11 +240,11 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
         //[HttpPost]
-        public ActionResult DeletePartList(int id, int partId, OrderPart partsList)
+        public ActionResult DeletePartList(int id, int partId, OrderPart OrderPart)
         {
             try
             {
-                partsListDb.Delete(partsListDb.Get(id, partId));
+                OrderPartDb.Delete(OrderPartDb.Get(id, partId));
                 return RedirectToAction(ActionNameDetails + id);
             }
             catch

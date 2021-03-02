@@ -8,30 +8,30 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 {
     public class InMemoryOrderPartData : IOrderPartData
     {
-        private readonly List<OrderPart> partsLists;
+        private readonly List<OrderPart> OrderParts;
 
         public InMemoryOrderPartData()
         {
-            partsLists = new List<OrderPart>();
+            OrderParts = new List<OrderPart>();
         }
 
-        public void Create(OrderPart partsList)
+        public void Create(OrderPart OrderPart)
         {
-            partsLists.Add(partsList);
+            OrderParts.Add(OrderPart);
         }
 
-        public void Delete(OrderPart partsList)
+        public void Delete(OrderPart OrderPart)
         {
-            partsLists.Remove(partsList);
+            OrderParts.Remove(OrderPart);
         }
 
-        public void Edit(OrderPart partsList)
+        public void Edit(OrderPart OrderPart)
         {
-            foreach(OrderPart toEdit in partsLists)
+            foreach(OrderPart toEdit in OrderParts)
             {
-                if (toEdit.OrderId == partsList.OrderId && toEdit.PartId == partsList.PartId)
+                if (toEdit.OrderId == OrderPart.OrderId && toEdit.PartId == OrderPart.PartId)
                 {
-                    toEdit.Amount = partsList.Amount;
+                    toEdit.Amount = OrderPart.Amount;
                     break;
                 }
             }
@@ -39,17 +39,17 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 
         public OrderPart Get(int orderId, int partId)
         {
-            return partsLists.SingleOrDefault(p => p.OrderId == orderId && p.PartId == partId);
+            return OrderParts.SingleOrDefault(p => p.OrderId == orderId && p.PartId == partId);
         }
 
         public IEnumerable<OrderPart> GetAll()
         {
-            return partsLists;
+            return OrderParts;
         }
 
         IEnumerable<OrderPart> IOrderPartData.Get(int id)
         {
-            return partsLists.Where(p => p.OrderId==id);
+            return OrderParts.Where(p => p.OrderId==id);
         }
     }
 }

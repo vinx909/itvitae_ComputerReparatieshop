@@ -77,7 +77,7 @@
         <p>
             @Html.ActionLink("Add New Part", "CreatePart", new { Id = Model.Details.OrderId })
         </p>
-        @{ComputerReparatieshop.Web.Models.PartsList_Detail dummy = Model.PartsLists.FirstOrDefault();}
+        @{ComputerReparatieshop.Web.Models.OrderPart_Detail dummy = Model.OrderParts.FirstOrDefault();}
         <table class="table">
             <tr>
                 <th>
@@ -91,7 +91,7 @@
                 </th>
             </tr>
 
-            @foreach (var item in Model.PartsLists)
+            @foreach (var item in Model.OrderParts)
             {
                 <tr>
                     <td>

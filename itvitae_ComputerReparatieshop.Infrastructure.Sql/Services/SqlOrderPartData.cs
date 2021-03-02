@@ -14,21 +14,21 @@ namespace ComputerReparatieshop.Infrastructure.Sql.Services
             this.db = db;
         }
 
-        public void Create(OrderPart partsList)
+        public void Create(OrderPart OrderPart)
         {
-            db.OrderParts.Add(partsList);
+            db.OrderParts.Add(OrderPart);
             db.SaveChanges();
         }
 
-        public void Delete(OrderPart partsList)
+        public void Delete(OrderPart OrderPart)
         {
-            db.OrderParts.Remove(partsList);
+            db.OrderParts.Remove(OrderPart);
             db.SaveChanges();
         }
 
-        public void Edit(OrderPart partsList)
+        public void Edit(OrderPart OrderPart)
         {
-            var entry = db.Entry(partsList);
+            var entry = db.Entry(OrderPart);
             entry.State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
         }

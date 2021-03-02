@@ -8,8 +8,8 @@ namespace ComputerReparatieshop.Domain.Services
         IEnumerable<OrderPart> GetAll();
         IEnumerable<OrderPart> Get(int orderId);
         OrderPart Get(int orderId, int partId);
-        void Edit(OrderPart partsList);
-        void Create(OrderPart partsList);
-        void Delete(OrderPart partsList);
+        void Edit(OrderPart OrderPart);
+        void Create(OrderPart OrderPart);
+        void Delete(OrderPart OrderPart);
     }
 }

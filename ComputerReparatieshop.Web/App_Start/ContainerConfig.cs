@@ -14,7 +14,7 @@ namespace ComputerReparatieshop.Web
             InMemory,
             Sql
         }
-        private const InfrastructureOrigin infrastructureOrigin = InfrastructureOrigin.Sql;
+        private const InfrastructureOrigin infrastructureOrigin = InfrastructureOrigin.InMemory;
 
         internal static void RegisterContainer()
         {

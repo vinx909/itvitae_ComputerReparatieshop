@@ -13,7 +13,7 @@ namespace ComputerReparatieshop.Web.Models
     {
 
         public Order_Detail Details { get; set; }
-        public IEnumerable<OrderPart_Detail> PartsLists { get; set; }
+        public IEnumerable<OrderPart_Detail> OrderParts { get; set; }
         [RegularExpression(@"^[0-9]{1,16}([.,][0-9]{1,3})?$")]
         [Range(0, 9999999999999999.99)]
         public decimal EmployeePayPerHour { private get; set; }
@@ -21,14 +21,14 @@ namespace ComputerReparatieshop.Web.Models
             get
             {
                 decimal toReturn = Details.HoursWorked * EmployeePayPerHour;
-                foreach(OrderPart_Detail partsList in PartsLists)
+                foreach(OrderPart_Detail OrderPart in OrderParts)
                 {
-                    toReturn += partsList.Price * partsList.Amount;
+                    toReturn += OrderPart.Price * OrderPart.Amount;
                 }
                 return toReturn;
             }
         }
-        public Order_Detail_Parts(ICustomerData customerData, IEmployeeData employeeData, IOrderData orderData, IPartData partData, IOrderPartData partsListData, IStatusData statusData, int orderId)
+        public Order_Detail_Parts(ICustomerData customerData, IEmployeeData employeeData, IOrderData orderData, IPartData partData, IOrderPartData OrderPartData, IStatusData statusData, int orderId)
         {
             Order order = orderData.Get(orderId);
             if (order == null)
@@ -38,14 +38,14 @@ namespace ComputerReparatieshop.Web.Models
             Employee employee = employeeData.Get(order.EmployeeId);
 
             Details = new Order_Detail(employee, customerData,statusData,order);
-            PartsLists = new List<OrderPart_Detail>();
+            this.OrderParts = new List<OrderPart_Detail>();
             EmployeePayPerHour = employee.PayPerHour;
 
-            IEnumerable<OrderPart> partsLists = partsListData.Get(orderId);
-            foreach (OrderPart partsList in partsLists)
+            IEnumerable<OrderPart> OrderParts = OrderPartData.Get(orderId);
+            foreach (OrderPart OrderPart in OrderParts)
             {
-                OrderPart_Detail newDetail = new OrderPart_Detail(partData, partsList);
-                PartsLists = PartsLists.Concat(new[] { newDetail });
+                OrderPart_Detail newDetail = new OrderPart_Detail(partData, OrderPart);
+                this.OrderParts = this.OrderParts.Concat(new[] { newDetail });
             }
         }
     }

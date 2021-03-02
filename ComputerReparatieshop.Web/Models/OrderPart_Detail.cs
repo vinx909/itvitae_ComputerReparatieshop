@@ -18,39 +18,39 @@ namespace ComputerReparatieshop.Web.Models
         [Range(0, 9999999999999999.99)]
         public decimal Price { get; set; }
 
-        public OrderPart_Detail(IPartData partData, OrderPart partsList)
+        public OrderPart_Detail(IPartData partData, OrderPart OrderPart)
         {
-            Constructor(partData, partsList);
+            Constructor(partData, OrderPart);
         }
-        public OrderPart_Detail(IOrderPartData partsListData, IPartData partData, int orderId, int partsListId)
+        public OrderPart_Detail(IOrderPartData OrderPartData, IPartData partData, int orderId, int OrderPartId)
         {
-            OrderPart partsList = partsListData.Get(orderId, partsListId);
-            if (partsList == null)
+            OrderPart OrderPart = OrderPartData.Get(orderId, OrderPartId);
+            if (OrderPart == null)
             {
                 throw new NotFoundInDatabaseException();
             }
-            Constructor(partData, partsList);
+            Constructor(partData, OrderPart);
         }
 
-        public OrderPart_Detail(IPartData partData, IOrderPartData partsListData, int orderId, int partId)
+        public OrderPart_Detail(IPartData partData, IOrderPartData OrderPartData, int orderId, int partId)
         {
-            OrderPart partsList = partsListData.Get(orderId, partId);
-            Part part = partData.Get(partsList.PartId);
-            OrderId = partsList.OrderId;
-            PartId = partsList.PartId;
+            OrderPart OrderPart = OrderPartData.Get(orderId, partId);
+            Part part = partData.Get(OrderPart.PartId);
+            OrderId = OrderPart.OrderId;
+            PartId = OrderPart.PartId;
             Name = part.Name;
-            Amount = partsList.Amount;
+            Amount = OrderPart.Amount;
             Price = part.Price;
         }
 
-        private void Constructor(IPartData partData, OrderPart partsList)
+        private void Constructor(IPartData partData, OrderPart OrderPart)
         {
-            Part part = partData.Get(partsList.PartId);
+            Part part = partData.Get(OrderPart.PartId);
 
-            OrderId = partsList.OrderId;
-            PartId = partsList.PartId;
+            OrderId = OrderPart.OrderId;
+            PartId = OrderPart.PartId;
             Name = part.Name;
-            Amount = partsList.Amount;
+            Amount = OrderPart.Amount;
             Price = part.Price;
         }
     }
