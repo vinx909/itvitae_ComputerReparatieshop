@@ -231,7 +231,6 @@
     <Content Include="Views\Order\EditPartList.cshtml" />
     <Content Include="Views\Order\CreatePart.cshtml" />
     <Content Include="Views\Order\DeletePartList.cshtml" />
-    <Content Include="Views\Employee\Edit.cshtml" />
     <Content Include="Views\Part\Index.cshtml" />
     <Content Include="Views\Part\Details.cshtml" />
     <Content Include="Views\Part\Create.cshtml" />
@@ -241,6 +240,8 @@
     <Content Include="Views\Customer\notFound.cshtml" />
     <Content Include="Views\Part\notFound.cshtml" />
     <Content Include="Views\Employee\notFound.cshtml" />
+    <Content Include="Views\Employee\Delete.cshtml" />
+    <Content Include="Views\Employee\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -67,7 +67,7 @@ namespace ComputerReparatieshop.Web.Controllers
         {
             try
             {
-                Employee_Returner model = new Employee_Returner(db, id);
+                Employee model = db.Get(id);
                 return View(model);
             }
             catch (NotFoundInDatabaseException)
