@@ -18,13 +18,13 @@ namespace ComputerReparatieshop.Web.Models
         [Range(0, 9999999999999999.99)]
         public decimal Price { get; set; }
 
-        public PartsList_Detail(IPartData partData, PartsList partsList)
+        public PartsList_Detail(IPartData partData, OrderPart partsList)
         {
             Constructor(partData, partsList);
         }
-        public PartsList_Detail(IPartsListData partsListData, IPartData partData, int orderId, int partsListId)
+        public PartsList_Detail(IOrderPartData partsListData, IPartData partData, int orderId, int partsListId)
         {
-            PartsList partsList = partsListData.Get(orderId, partsListId);
+            OrderPart partsList = partsListData.Get(orderId, partsListId);
             if (partsList == null)
             {
                 throw new NotFoundInDatabaseException();
@@ -32,9 +32,9 @@ namespace ComputerReparatieshop.Web.Models
             Constructor(partData, partsList);
         }
 
-        public PartsList_Detail(IPartData partData, IPartsListData partsListData, int orderId, int partId)
+        public PartsList_Detail(IPartData partData, IOrderPartData partsListData, int orderId, int partId)
         {
-            PartsList partsList = partsListData.Get(orderId, partId);
+            OrderPart partsList = partsListData.Get(orderId, partId);
             Part part = partData.Get(partsList.PartId);
             OrderId = partsList.OrderId;
             PartId = partsList.PartId;
@@ -43,7 +43,7 @@ namespace ComputerReparatieshop.Web.Models
             Price = part.Price;
         }
 
-        private void Constructor(IPartData partData, PartsList partsList)
+        private void Constructor(IPartData partData, OrderPart partsList)
         {
             Part part = partData.Get(partsList.PartId);
 

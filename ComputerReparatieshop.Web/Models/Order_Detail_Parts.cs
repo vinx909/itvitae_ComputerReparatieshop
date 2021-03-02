@@ -28,7 +28,7 @@ namespace ComputerReparatieshop.Web.Models
                 return toReturn;
             }
         }
-        public Order_Detail_Parts(ICustomerData customerData, IEmployeeData employeeData, IOrderData orderData, IPartData partData, IPartsListData partsListData, IStatusData statusData, int orderId)
+        public Order_Detail_Parts(ICustomerData customerData, IEmployeeData employeeData, IOrderData orderData, IPartData partData, IOrderPartData partsListData, IStatusData statusData, int orderId)
         {
             Order order = orderData.Get(orderId);
             if (order == null)
@@ -41,8 +41,8 @@ namespace ComputerReparatieshop.Web.Models
             PartsLists = new List<PartsList_Detail>();
             EmployeePayPerHour = employee.PayPerHour;
 
-            IEnumerable<PartsList> partsLists = partsListData.Get(orderId);
-            foreach (PartsList partsList in partsLists)
+            IEnumerable<OrderPart> partsLists = partsListData.Get(orderId);
+            foreach (OrderPart partsList in partsLists)
             {
                 PartsList_Detail newDetail = new PartsList_Detail(partData, partsList);
                 PartsLists = PartsLists.Concat(new[] { newDetail });

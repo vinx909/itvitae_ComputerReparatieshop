@@ -47,7 +47,7 @@
     <Compile Include="Services\InMemoryImageData.cs" />
     <Compile Include="Services\InMemoryOrderData.cs" />
     <Compile Include="Services\InMemoryPartData.cs" />
-    <Compile Include="Services\InMemoryPartsListData.cs" />
+    <Compile Include="Services\InMemoryOrderPartData.cs" />
     <Compile Include="Services\InMemoryStatusData.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@ namespace ComputerReparatieshop.Web
             InMemory,
             Sql
         }
-        private const InfrastructureOrigin infrastructureOrigin = InfrastructureOrigin.InMemory;
+        private const InfrastructureOrigin infrastructureOrigin = InfrastructureOrigin.Sql;
 
         internal static void RegisterContainer()
         {
@@ -31,7 +31,7 @@ namespace ComputerReparatieshop.Web
                     builder.RegisterType<SqlImageData>().As<IImageData>().InstancePerRequest();
                     builder.RegisterType<SqlOrderData>().As<IOrderData>().InstancePerRequest();
                     builder.RegisterType<SqlPartData>().As<IPartData>().InstancePerRequest();
-                    builder.RegisterType<SqlPartsListData>().As<IPartsListData>().InstancePerRequest();
+                    builder.RegisterType<SqlOrderPartData>().As<IOrderPartData>().InstancePerRequest();
                     builder.RegisterType<SqlStatusData>().As<IStatusData>().InstancePerRequest();
                     break;
                 case InfrastructureOrigin.InMemory:
@@ -40,7 +40,7 @@ namespace ComputerReparatieshop.Web
                     builder.RegisterType<InMemoryImageData>().As<IImageData>().SingleInstance();
                     builder.RegisterType<InMemoryOrderData>().As<IOrderData>().SingleInstance();
                     builder.RegisterType<InMemoryPartData>().As<IPartData>().SingleInstance();
-                    builder.RegisterType<InMemoryPartsListData>().As<IPartsListData>().SingleInstance();
+                    builder.RegisterType<InMemoryOrderPartData>().As<IOrderPartData>().SingleInstance();
                     builder.RegisterType<InMemoryStatusData>().As<IStatusData>().SingleInstance();
                     break;
             }

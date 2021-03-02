@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ComputerReparatieshop.Domain.Models
 {
-    public class PartsList
+    public class OrderPart
     {
         [Required]
         [Key]

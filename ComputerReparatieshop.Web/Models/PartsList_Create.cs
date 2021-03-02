@@ -9,7 +9,7 @@ namespace ComputerReparatieshop.Web.Models
     {
         public int OrderId { get; set; }
         public IEnumerable<Part> Parts { get; set; }
-        public PartsList WorkingOn { get; set; }
+        public OrderPart WorkingOn { get; set; }
 
         public PartsList_Create()
         {
@@ -19,7 +19,7 @@ namespace ComputerReparatieshop.Web.Models
         {
             OrderId = orderId;
             Parts = partDb.GetAll();
-            WorkingOn = new PartsList() { PartId = Parts.FirstOrDefault().Id };
+            WorkingOn = new OrderPart() { PartId = Parts.FirstOrDefault().Id };
         }
     }
 }

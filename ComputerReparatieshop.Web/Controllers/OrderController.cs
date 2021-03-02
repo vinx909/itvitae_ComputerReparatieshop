@@ -26,10 +26,10 @@ namespace ComputerReparatieshop.Web.Controllers
         private readonly IImageData imageListDb;
         private readonly IOrderData orderDb;
         private readonly IPartData partDb;
-        private readonly IPartsListData partsListDb;
+        private readonly IOrderPartData partsListDb;
         private readonly IStatusData statusDb;
 
-        public OrderController(ICustomerData customerDb, IEmployeeData employeeDb, IImageData imageListDb, IOrderData orderDb, IPartData partDb, IPartsListData partsListDb, IStatusData statusDb)
+        public OrderController(ICustomerData customerDb, IEmployeeData employeeDb, IImageData imageListDb, IOrderData orderDb, IPartData partDb, IOrderPartData partsListDb, IStatusData statusDb)
         {
             this.customerDb = customerDb;
             this.employeeDb = employeeDb;
@@ -184,7 +184,7 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult EditPartList(int id, int partId)
         {
-            PartsList model = partsListDb.Get(id, partId);
+            OrderPart model = partsListDb.Get(id, partId);
             if (model == null)
             {
                 return View(ViewNamePartNotFound, id);
@@ -192,7 +192,7 @@ namespace ComputerReparatieshop.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditPartList(int id, PartsList partsList)
+        public ActionResult EditPartList(int id, OrderPart partsList)
         {
             try
             {
@@ -240,7 +240,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
         //[HttpPost]
-        public ActionResult DeletePartList(int id, int partId, PartsList partsList)
+        public ActionResult DeletePartList(int id, int partId, OrderPart partsList)
         {
             try
             {

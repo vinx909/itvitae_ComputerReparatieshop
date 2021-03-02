@@ -6,28 +6,28 @@ using System.Linq;
 
 namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 {
-    public class InMemoryPartsListData : IPartsListData
+    public class InMemoryOrderPartData : IOrderPartData
     {
-        private readonly List<PartsList> partsLists;
+        private readonly List<OrderPart> partsLists;
 
-        public InMemoryPartsListData()
+        public InMemoryOrderPartData()
         {
-            partsLists = new List<PartsList>();
+            partsLists = new List<OrderPart>();
         }
 
-        public void Create(PartsList partsList)
+        public void Create(OrderPart partsList)
         {
             partsLists.Add(partsList);
         }
 
-        public void Delete(PartsList partsList)
+        public void Delete(OrderPart partsList)
         {
             partsLists.Remove(partsList);
         }
 
-        public void Edit(PartsList partsList)
+        public void Edit(OrderPart partsList)
         {
-            foreach(PartsList toEdit in partsLists)
+            foreach(OrderPart toEdit in partsLists)
             {
                 if (toEdit.OrderId == partsList.OrderId && toEdit.PartId == partsList.PartId)
                 {
@@ -37,17 +37,17 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
             }
         }
 
-        public PartsList Get(int orderId, int partId)
+        public OrderPart Get(int orderId, int partId)
         {
             return partsLists.SingleOrDefault(p => p.OrderId == orderId && p.PartId == partId);
         }
 
-        public IEnumerable<PartsList> GetAll()
+        public IEnumerable<OrderPart> GetAll()
         {
             return partsLists;
         }
 
-        IEnumerable<PartsList> IPartsListData.Get(int id)
+        IEnumerable<OrderPart> IOrderPartData.Get(int id)
         {
             return partsLists.Where(p => p.OrderId==id);
         }

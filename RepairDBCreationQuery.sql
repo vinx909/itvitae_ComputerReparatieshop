@@ -1,10 +1,11 @@
 ﻿/**/
-
+/*
 USE [master]
 DROP DATABASE [RepairDB]
 CREATE DATABASE [RepairDB]
 USE [RepairDB]
 GO
+**/
 
 /** Object:  Table [dbo].[Customers]    Script Date: 1/29/2021 3:01:54 PM **/
 SET ANSI_NULLS ON
@@ -112,12 +113,12 @@ CREATE TABLE [dbo].[Parts](
 	) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/** Object:  Table [dbo].[PartsLists]    Script Date: 1/29/2021 3:01:54 PM **/
+/** Object:  Table [dbo].[OrderParts]    Script Date: 1/29/2021 3:01:54 PM **/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[PartsLists](
+CREATE TABLE [dbo].[OrderParts](
 	[OrderId] [int] NOT NULL,
 	[PartId] [int] NOT NULL,
 	[Amount] [int] NOT NULL,
@@ -167,13 +168,13 @@ REFERENCES [dbo].[Status] ([Id])
 GO
 ALTER TABLE [dbo].[Orders] CHECK CONSTRAINT [FK_Order_Status]
 GO
-ALTER TABLE [dbo].[PartsLists]  WITH CHECK ADD  CONSTRAINT [FK_PartsList_Order] FOREIGN KEY([OrderId])
+ALTER TABLE [dbo].[OrderParts]  WITH CHECK ADD  CONSTRAINT [FK_PartsList_Order] FOREIGN KEY([OrderId])
 REFERENCES [dbo].[Orders] ([Id])
 GO
-ALTER TABLE [dbo].[PartsLists] CHECK CONSTRAINT [FK_PartsList_Order]
+ALTER TABLE [dbo].[OrderParts] CHECK CONSTRAINT [FK_PartsList_Order]
 GO
-ALTER TABLE [dbo].[PartsLists]  WITH CHECK ADD  CONSTRAINT [FK_PartsList_Part] FOREIGN KEY([PartId])
+ALTER TABLE [dbo].[OrderParts]  WITH CHECK ADD  CONSTRAINT [FK_PartsList_Part] FOREIGN KEY([PartId])
 REFERENCES [dbo].[Parts] ([Id])
 GO
-ALTER TABLE [dbo].[PartsLists] CHECK CONSTRAINT [FK_PartsList_Part]
+ALTER TABLE [dbo].[OrderParts] CHECK CONSTRAINT [FK_PartsList_Part]
 GO

@@ -23,5 +23,5 @@ VALUES  (1, 1, 1, 'It won''t turn on.', '2-2-2021 12:33:00', 1.2, 1);
 INSERT INTO Parts (Name, Price)
 VALUES  ('fan version 1', 9.99);
 
-INSERT INTO PartsLists (OrderId, PartId, Amount)
+INSERT INTO OrderParts(OrderId, PartId, Amount)
 VALUES  (1,1,1);

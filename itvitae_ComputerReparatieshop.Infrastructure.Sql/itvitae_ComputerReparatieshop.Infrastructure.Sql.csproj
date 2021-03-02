@@ -55,7 +55,7 @@
     <Compile Include="Services\SqlImageData.cs" />
     <Compile Include="Services\SqlOrderData.cs" />
     <Compile Include="Services\SqlPartData.cs" />
-    <Compile Include="Services\SqlPartsListData.cs" />
+    <Compile Include="Services\SqlOrderPartData.cs" />
     <Compile Include="Services\SqlStatusData.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -10,7 +10,7 @@ namespace ComputerReparatieshop.Infrastructure.Sql.Services
         public DbSet<Image> Images { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Part> Parts { get; set; }
-        public DbSet<PartsList> PartsLists { get; set; }
+        public DbSet<OrderPart> OrderParts { get; set; }
         public DbSet<Status> Status { get; set; }
     }
 }
