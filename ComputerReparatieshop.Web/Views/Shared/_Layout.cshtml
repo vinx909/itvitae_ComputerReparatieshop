@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model object
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -31,6 +33,33 @@
             </div>
         </div>
     </div>
+    @if (typeof(ComputerReparatieshop.Web.Models.AmountPerStatusModel).IsInstanceOfType(Model))
+    {
+        ComputerReparatieshop.Web.Models.AmountPerStatusModel baseView = (ComputerReparatieshop.Web.Models.AmountPerStatusModel)Model;
+        var dummyStatus = baseView.AmountPerStatuses.FirstOrDefault();
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => dummyStatus.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => dummyStatus.Amount)
+                </th>
+            </tr>
+
+            @foreach (var item in baseView.AmountPerStatuses)
+            {
+                <tr style="background-color: @item.StatusColour;">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
     <div class="container body-content">
         @RenderBody()
         <hr />

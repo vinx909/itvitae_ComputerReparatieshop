@@ -7,11 +7,9 @@ using ComputerReparatieshop.Domain.Services;
 
 namespace ComputerReparatieshop.Web.Models
 {
-    public class Order_Index
+    public class Order_Index : AmountPerStatusModel
     {
         private const string starDateChangedColour = "#FF0000";
-
-        public IEnumerable<Order_Index_Status> AmountPerStatuses { get; set; }
         public IEnumerable<Order_Detail> Orders { get; set; }
 
         public Order_Index(IEmployeeData employeeData, ICustomerData customerData, IOrderData orderData, IStatusData statusData, int? id)

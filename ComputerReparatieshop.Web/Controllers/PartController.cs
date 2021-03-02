@@ -22,7 +22,7 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Part
         public ActionResult Index()
         {
-            IEnumerable<Part> model = db.GetAll();
+            Part_Index model = new Part_Index(db);
             return View(model);
         }
 

@@ -12,7 +12,6 @@ namespace ComputerReparatieshop.Web.Controllers
 
     public class OrderController : Controller
     {
-        private const string starDateChangedColour = "#FF0000";
         private const int createdOrderStatusId = 1;
         private const bool createdOrderToDO = true;
         private const string ViewNameNotFound = "notFound";

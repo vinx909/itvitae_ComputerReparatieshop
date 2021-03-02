@@ -9,31 +9,6 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-
-@{ ComputerReparatieshop.Web.Models.Order_Index_Status dummyStatus = Model.AmountPerStatuses.FirstOrDefault();}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => dummyStatus.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => dummyStatus.Amount)
-        </th>
-    </tr>
-
-    @foreach (var item in Model.AmountPerStatuses)
-    {
-        <tr style="background-color: @item.StatusColour;">
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-        </tr>
-        }
-    </table>
-
 @{ ComputerReparatieshop.Web.Models.Order_Detail dummyOrder = Model.Orders.FirstOrDefault();}
 <table class="table">
     <tr>

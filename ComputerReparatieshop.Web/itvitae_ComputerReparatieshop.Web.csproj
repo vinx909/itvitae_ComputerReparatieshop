@@ -161,6 +161,9 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PartController.cs" />
     <Compile Include="Exceptions\NotFoundInDatabaseException.cs" />
+    <Compile Include="Models\AmountPerStatusModel.cs" />
+    <Compile Include="Models\Customer_Index.cs" />
+    <Compile Include="Models\Employee_Index.cs" />
     <Compile Include="Models\Employee_Returner.cs" />
     <Compile Include="Models\Order_Delete.cs" />
     <Compile Include="Global.asax.cs">
@@ -173,6 +176,7 @@
     <Compile Include="Models\Order_Index_Status.cs" />
     <Compile Include="Models\OrderPart_Create.cs" />
     <Compile Include="Models\OrderPart_Detail.cs" />
+    <Compile Include="Models\Part_Index.cs" />
     <Compile Include="Models\Part_Returner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

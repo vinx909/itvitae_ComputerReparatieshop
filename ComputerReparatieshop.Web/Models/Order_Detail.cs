@@ -24,11 +24,11 @@ namespace ComputerReparatieshop.Web.Models
         [Range(0, 9999999999999999.99)]
         public decimal HoursWorked { get; set; }
 
-        public Order_Detail()
+        public Order_Detail():base()
         {
             //required for views even with no visible references
         }
-        public Order_Detail(IEmployeeData employeeData, ICustomerData customerData, IStatusData statusData, IOrderData orderData, int orderId)
+        public Order_Detail(IEmployeeData employeeData, ICustomerData customerData, IStatusData statusData, IOrderData orderData, int orderId) : base()
         {
             Order order = orderData.Get(orderId);
             if(order == null)
@@ -41,13 +41,13 @@ namespace ComputerReparatieshop.Web.Models
 
             Construtor(employee, customerData, statuses, order);
         }
-        public Order_Detail(IEmployeeData employeeData, ICustomerData customerData, IEnumerable<Status> statuses, Order order) : this(employeeData.Get(order.EmployeeId), customerData, statuses, order)
+        public Order_Detail(IEmployeeData employeeData, ICustomerData customerData, IEnumerable<Status> statuses, Order order) : base()
         {
             Employee employee = employeeData.Get(order.EmployeeId);
 
             Construtor(employee, customerData, statuses, order);
         }
-        public Order_Detail(Employee employee, ICustomerData customerData, IStatusData statusData, Order order) : this(employee, customerData, statusData.GetAll(), order)
+        public Order_Detail(Employee employee, ICustomerData customerData, IStatusData statusData, Order order) : base()
         {
             IEnumerable<Status> statuses = statusData.GetAll();
 

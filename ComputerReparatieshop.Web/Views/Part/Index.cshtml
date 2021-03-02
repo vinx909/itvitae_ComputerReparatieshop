@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ComputerReparatieshop.Domain.Models.Part>
+﻿@model ComputerReparatieshop.Web.Models.Part_Index
 @{
     ViewBag.Title = "Index";
 }
@@ -8,18 +8,19 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@{ var dummy = Model.Parts.FirstOrDefault();}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => dummy.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => dummy.Name)
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Parts)
     {
         <tr>
             <td>

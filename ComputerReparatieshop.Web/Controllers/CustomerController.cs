@@ -1,5 +1,6 @@
 ﻿using ComputerReparatieshop.Domain.Models;
 using ComputerReparatieshop.Domain.Services;
+using ComputerReparatieshop.Web.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -19,7 +20,7 @@ namespace ComputerReparatieshop.Web.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            IEnumerable<Customer> model = db.GetAll();
+            Customer_Index model = new Customer_Index(db);
             return View(model);
         }
 
