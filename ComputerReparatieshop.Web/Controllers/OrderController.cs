@@ -172,7 +172,7 @@ namespace ComputerReparatieshop.Web.Controllers
         {
             try
             {
-                PartsList_Detail model = new PartsList_Detail(partsListDb, partDb, id, partId);
+                OrderPart_Detail model = new OrderPart_Detail(partsListDb, partDb, id, partId);
                 return View(model);
             }
             catch(NotFoundInDatabaseException)
@@ -208,11 +208,11 @@ namespace ComputerReparatieshop.Web.Controllers
         [HttpGet]
         public ActionResult CreatePart(int id)
         {
-            PartsList_Create model = new PartsList_Create(id, partDb);
+            OrderPart_Create model = new OrderPart_Create(id, partDb);
             return View(model);
         }
         [HttpPost]
-        public ActionResult CreatePart(int id, PartsList_Create partsList)
+        public ActionResult CreatePart(int id, OrderPart_Create partsList)
         {
             try
             {
@@ -231,7 +231,7 @@ namespace ComputerReparatieshop.Web.Controllers
         public ActionResult DeletePartList(int id, int partId){
             try
             {
-                PartsList_Detail model = new PartsList_Detail(partDb, partsListDb, id, partId);
+                OrderPart_Detail model = new OrderPart_Detail(partDb, partsListDb, id, partId);
                 return View(model);
             }
             catch(NotFoundInDatabaseException)

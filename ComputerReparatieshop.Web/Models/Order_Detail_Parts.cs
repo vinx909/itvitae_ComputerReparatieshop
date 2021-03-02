@@ -13,7 +13,7 @@ namespace ComputerReparatieshop.Web.Models
     {
 
         public Order_Detail Details { get; set; }
-        public IEnumerable<PartsList_Detail> PartsLists { get; set; }
+        public IEnumerable<OrderPart_Detail> PartsLists { get; set; }
         [RegularExpression(@"^[0-9]{1,16}([.,][0-9]{1,3})?$")]
         [Range(0, 9999999999999999.99)]
         public decimal EmployeePayPerHour { private get; set; }
@@ -21,7 +21,7 @@ namespace ComputerReparatieshop.Web.Models
             get
             {
                 decimal toReturn = Details.HoursWorked * EmployeePayPerHour;
-                foreach(PartsList_Detail partsList in PartsLists)
+                foreach(OrderPart_Detail partsList in PartsLists)
                 {
                     toReturn += partsList.Price * partsList.Amount;
                 }
@@ -38,13 +38,13 @@ namespace ComputerReparatieshop.Web.Models
             Employee employee = employeeData.Get(order.EmployeeId);
 
             Details = new Order_Detail(employee, customerData,statusData,order);
-            PartsLists = new List<PartsList_Detail>();
+            PartsLists = new List<OrderPart_Detail>();
             EmployeePayPerHour = employee.PayPerHour;
 
             IEnumerable<OrderPart> partsLists = partsListData.Get(orderId);
             foreach (OrderPart partsList in partsLists)
             {
-                PartsList_Detail newDetail = new PartsList_Detail(partData, partsList);
+                OrderPart_Detail newDetail = new OrderPart_Detail(partData, partsList);
                 PartsLists = PartsLists.Concat(new[] { newDetail });
             }
         }

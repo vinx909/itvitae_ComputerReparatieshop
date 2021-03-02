@@ -5,7 +5,7 @@ using ComputerReparatieshop.Web.Exceptions;
 
 namespace ComputerReparatieshop.Web.Models
 {
-    public class PartsList_Detail
+    public class OrderPart_Detail
     {
 
         public int OrderId { get; set; }
@@ -18,11 +18,11 @@ namespace ComputerReparatieshop.Web.Models
         [Range(0, 9999999999999999.99)]
         public decimal Price { get; set; }
 
-        public PartsList_Detail(IPartData partData, OrderPart partsList)
+        public OrderPart_Detail(IPartData partData, OrderPart partsList)
         {
             Constructor(partData, partsList);
         }
-        public PartsList_Detail(IOrderPartData partsListData, IPartData partData, int orderId, int partsListId)
+        public OrderPart_Detail(IOrderPartData partsListData, IPartData partData, int orderId, int partsListId)
         {
             OrderPart partsList = partsListData.Get(orderId, partsListId);
             if (partsList == null)
@@ -32,7 +32,7 @@ namespace ComputerReparatieshop.Web.Models
             Constructor(partData, partsList);
         }
 
-        public PartsList_Detail(IPartData partData, IOrderPartData partsListData, int orderId, int partId)
+        public OrderPart_Detail(IPartData partData, IOrderPartData partsListData, int orderId, int partId)
         {
             OrderPart partsList = partsListData.Get(orderId, partId);
             Part part = partData.Get(partsList.PartId);

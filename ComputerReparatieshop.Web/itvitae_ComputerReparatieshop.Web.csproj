@@ -171,8 +171,8 @@
     <Compile Include="Models\Order_Edit.cs" />
     <Compile Include="Models\Order_Detail.cs" />
     <Compile Include="Models\Order_Index_Status.cs" />
-    <Compile Include="Models\PartsList_Create.cs" />
-    <Compile Include="Models\PartsList_Detail.cs" />
+    <Compile Include="Models\OrderPart_Create.cs" />
+    <Compile Include="Models\OrderPart_Detail.cs" />
     <Compile Include="Models\Part_Returner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
