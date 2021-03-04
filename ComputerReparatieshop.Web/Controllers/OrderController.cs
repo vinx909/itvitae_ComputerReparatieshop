@@ -16,10 +16,10 @@ namespace ComputerReparatieshop.Web.Controllers
         private const bool createdOrderToDO = true;
         private const string ViewNameNotFound = "notFound";
         private const string ViewNamePartNotFound = "partNotFound";
+        private const string ViewNameImageNotFound = "imageNotFound";
         private const string ActionNameIndex = "Index";
         private const string ActionNameIndexWithId = "Index/";
         private const string ActionNameDetails = "Details/";
-
         private readonly ICustomerData customerDb;
         private readonly IEmployeeData employeeDb;
         private readonly IImageData imageListDb;
@@ -50,7 +50,7 @@ namespace ComputerReparatieshop.Web.Controllers
         {
             try
             {
-                Order_Detail_Parts model = new Order_Detail_Parts(customerDb, employeeDb, orderDb, partDb, OrderPartDb, statusDb, id);
+                Order_FullDetails model = new Order_FullDetails(customerDb, employeeDb, imageListDb, orderDb, partDb, OrderPartDb, statusDb, id);
                 return View(model);
             }
             catch (NotFoundInDatabaseException)
@@ -238,7 +238,7 @@ namespace ComputerReparatieshop.Web.Controllers
                 return View(ViewNamePartNotFound, id);
             }
         }
-        //[HttpPost]
+        [HttpPost]
         public ActionResult DeletePartList(int id, int partId, OrderPart OrderPart)
         {
             try
@@ -249,6 +249,67 @@ namespace ComputerReparatieshop.Web.Controllers
             catch
             {
                 return DeletePartList(id, partId);
+            }
+        }
+        [HttpGet]
+        public ActionResult CreateImage(int id)
+        {
+            if (orderDb.IdExists(id)==false)
+            {
+                return RedirectToAction(ViewNameNotFound);
+            }
+            Image model = new Image() { OrderId = id };
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CreateImage(int id, Image image)
+        {
+            try
+            {
+                imageListDb.Create(image);
+                return RedirectToAction(ActionNameDetails + id);
+            }
+            catch(Exception e)
+            {
+                return View(image);
+            }
+        }
+        [HttpGet]
+        public ActionResult DetailImage(int id)
+        {
+            Image model = imageListDb.Get(id);
+            if (model == null)
+            {
+                return RedirectToAction(ViewNameImageNotFound);
+            }
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult DeleteImage(int id)
+        {
+            Image model = imageListDb.Get(id);
+            if (model == null)
+            {
+                return View(ViewNameImageNotFound);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult DeleteImage(Image OrderPart)
+        {
+            Image model = imageListDb.Get(OrderPart.Id);
+            if (model == null)
+            {
+                return View(ViewNameImageNotFound);
+            }
+            try
+            {
+                imageListDb.Delete(model);
+                return RedirectToAction(ActionNameDetails + model.OrderId);
+            }
+            catch
+            {
+                return View(model);
             }
         }
     }

@@ -65,5 +65,17 @@ namespace ComputerReparatieshop.Infrastructure.Sql.Services
         {
             return db.Orders.Where(o => o.ToDo == true);
         }
+
+        public bool IdExists(int id)
+        {
+            if (Get(id) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

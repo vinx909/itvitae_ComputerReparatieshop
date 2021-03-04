@@ -13,7 +13,18 @@ namespace ComputerReparatieshop.Infrastructure.Sql.Services
         {
             this.db = db;
         }
-        public IEnumerable<Image> Get(int id)
+
+        public void Create(Image image)
+        {
+            db.Images.Add(image);
+        }
+
+        public void Delete(Image image)
+        {
+            db.Images.Remove(image);
+        }
+
+        public IEnumerable<Image> GetOrderImages(int id)
         {
             return db.Images.Where(i => i.Id == id);
         }
@@ -21,6 +32,11 @@ namespace ComputerReparatieshop.Infrastructure.Sql.Services
         public IEnumerable<Image> GetAll()
         {
             return (IEnumerable<Image>)db.Images;
+        }
+
+        public Image Get(int id)
+        {
+            return db.Images.Find(id);
         }
     }
 }

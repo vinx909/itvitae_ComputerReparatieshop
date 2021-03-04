@@ -1,0 +1,27 @@
+﻿@model ComputerReparatieshop.Domain.Models.Image
+
+@{
+    ViewBag.Title = "DetailImage";
+}
+
+<h2>DetailImage</h2>
+
+<div>
+    <h4>Image</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+        
+    </dl>
+    <img src="@Model.ImagePath" />
+</div>
+<p>
+    @Html.ActionLink("Delete", "DeleteImage", new { id = Model.Id }) |
+    @Html.ActionLink("Back to Order", "Details", new { id = Model.OrderId })
+</p>

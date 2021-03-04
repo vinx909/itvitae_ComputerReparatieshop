@@ -12,7 +12,7 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
 
         public InMemoryOrderPartData()
         {
-            OrderParts = new List<OrderPart>();
+            OrderParts = new List<OrderPart>() { new OrderPart() { OrderId = 0, Amount = 1, PartId = 0 } } ;
         }
 
         public void Create(OrderPart OrderPart)

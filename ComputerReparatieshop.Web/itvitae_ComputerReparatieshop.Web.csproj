@@ -169,7 +169,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Order_Detail_Parts.cs" />
+    <Compile Include="Models\Order_FullDetails.cs" />
     <Compile Include="Models\Order_Index.cs" />
     <Compile Include="Models\Order_Edit.cs" />
     <Compile Include="Models\Order_Detail.cs" />
@@ -246,6 +246,10 @@
     <Content Include="Views\Employee\notFound.cshtml" />
     <Content Include="Views\Employee\Delete.cshtml" />
     <Content Include="Views\Employee\Edit.cshtml" />
+    <Content Include="Views\Order\CreateImage.cshtml" />
+    <Content Include="Views\Order\DetailImage.cshtml" />
+    <Content Include="Views\Order\imageNotFound.cshtml" />
+    <Content Include="Views\Order\DeleteImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

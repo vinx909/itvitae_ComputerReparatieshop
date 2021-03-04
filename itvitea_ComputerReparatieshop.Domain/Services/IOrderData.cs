@@ -11,5 +11,6 @@ namespace ComputerReparatieshop.Domain.Services
         void Edit(Order order);
         void Create(Order order);
         void Delete(Order order);
+        bool IdExists(int id);
     }
 }

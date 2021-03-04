@@ -6,6 +6,9 @@ namespace ComputerReparatieshop.Domain.Services
     public interface IImageData
     {
         IEnumerable<Image> GetAll();
-        IEnumerable<Image> Get(int id);
+        IEnumerable<Image> GetOrderImages(int id);
+        void Create(Image image);
+        void Delete(Image image);
+        Image Get(int id);
     }
 }

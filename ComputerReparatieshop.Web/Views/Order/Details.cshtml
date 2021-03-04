@@ -1,4 +1,4 @@
-﻿@model ComputerReparatieshop.Web.Models.Order_Detail_Parts
+﻿@model ComputerReparatieshop.Web.Models.Order_FullDetails
 
 @{
     ViewBag.Title = "Details";
@@ -111,6 +111,19 @@
                 </tr>
             }
         </table>
+        @Html.ActionLink("add new image", "CreateImage", new { Id = Model.Details.OrderId})
+    <table>
+        @foreach (var item in Model.Images)
+        {
+        <tr>
+            <td>
+                <a href="@Url.Action("DetailImage", new { id = item.Id })">
+                    <img src="@item.ImagePath" />
+                </a>
+            </td>
+        </tr>
+        }
+    </table>
 
         <p>
             @Html.ActionLink("Edit", "Edit", new { id = Model.Details.OrderId }) |

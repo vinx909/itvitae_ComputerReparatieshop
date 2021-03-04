@@ -6,8 +6,9 @@ namespace ComputerReparatieshop.Domain.Models
     {
         [Required]
         public int Id { get; set; }
+        //byte[]
         [Required]
-        public byte[] ImagePath { get; set; }
+        public string ImagePath { get; set; }
         [Required]
         public int OrderId { get; set; }
     }

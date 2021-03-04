@@ -14,7 +14,7 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
         {
             orders = new List<Order>()
             {
-                new Order { Id = 0, CustomerId = 0, EmployeeId = 1, StatusId = 0, Description = "It won't turn on.", StartDate = DateTime.Now, ToDo=true }
+                new Order { Id = 0, CustomerId = 0, EmployeeId = 1, StatusId = 0, Description = "It won't turn on.", StartDate = DateTime.Now, ToDo=true, HoursWorked= 2 }
             };
 
         }
@@ -55,6 +55,18 @@ namespace ComputerReparatieshop.Infrastructure.InMemory.Services
         public IEnumerable<Order> GetAllToDo()
         {
             return GetAll().Where(o => o.ToDo == true);
+        }
+
+        public bool IdExists(int id)
+        {
+            if (Get(id) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }
