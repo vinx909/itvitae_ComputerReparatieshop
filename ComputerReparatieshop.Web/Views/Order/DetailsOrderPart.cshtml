@@ -1,10 +1,10 @@
 ﻿@model ComputerReparatieshop.Web.Models.OrderPart_Detail
 
 @{
-    ViewBag.Title = "DetailsPartList";
+    ViewBag.Title = "DetailsOrderPart";
 }
 
-<h2>DetailsPartList</h2>
+<h2>DetailsOrderPart</h2>
 
 <div>
     <h4>PartsList_Detail</h4>
@@ -38,6 +38,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "EditPartList", new { Id = Model.OrderId, partId = Model.PartId }) |
+    @Html.ActionLink("Edit", "EditOrderPart", new { Id = Model.OrderId, partId = Model.PartId }) |
     @Html.ActionLink("Back to Order", "Details", new { Id = Model.OrderId })
 </p>

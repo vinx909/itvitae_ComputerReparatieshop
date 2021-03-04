@@ -231,10 +231,10 @@
     <Content Include="Views\Employee\Details.cshtml" />
     <Content Include="Views\Employee\Create.cshtml" />
     <Content Include="Views\Order\todelete.cshtml" />
-    <Content Include="Views\Order\DetailsPartList.cshtml" />
-    <Content Include="Views\Order\EditPartList.cshtml" />
+    <Content Include="Views\Order\DetailsOrderPart.cshtml" />
+    <Content Include="Views\Order\EditOrderPart.cshtml" />
     <Content Include="Views\Order\CreatePart.cshtml" />
-    <Content Include="Views\Order\DeletePartList.cshtml" />
+    <Content Include="Views\Order\DeleteOrderPart.cshtml" />
     <Content Include="Views\Part\Index.cshtml" />
     <Content Include="Views\Part\Details.cshtml" />
     <Content Include="Views\Part\Create.cshtml" />

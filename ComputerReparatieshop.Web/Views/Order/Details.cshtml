@@ -104,9 +104,9 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "EditPartList", new { Id = Model.Details.OrderId, partId = item.PartId }) |
-                        @Html.ActionLink("Details", "DetailsPartList", new { Id = Model.Details.OrderId, partId = item.PartId }) |
-                        @Html.ActionLink("Delete", "DeletePartList", new { Id = Model.Details.OrderId, partId = item.PartId })
+                        @Html.ActionLink("Edit", "EditOrderPart", new { Id = Model.Details.OrderId, partId = item.PartId }) |
+                        @Html.ActionLink("Details", "DetailsOrderPart", new { Id = Model.Details.OrderId, partId = item.PartId }) |
+                        @Html.ActionLink("Delete", "DeleteOrderPart", new { Id = Model.Details.OrderId, partId = item.PartId })
                     </td>
                 </tr>
             }

@@ -167,7 +167,7 @@ namespace ComputerReparatieshop.Web.Controllers
         }
 
 
-        public ActionResult DetailsPartList(int id, int partId)
+        public ActionResult DetailsOrderPart(int id, int partId)
         {
             try
             {
@@ -181,7 +181,7 @@ namespace ComputerReparatieshop.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditPartList(int id, int partId)
+        public ActionResult EditOrderPart(int id, int partId)
         {
             OrderPart model = OrderPartDb.Get(id, partId);
             if (model == null)
@@ -191,7 +191,7 @@ namespace ComputerReparatieshop.Web.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult EditPartList(int id, OrderPart OrderPart)
+        public ActionResult EditOrderPart(int id, OrderPart OrderPart)
         {
             try
             {
@@ -227,7 +227,7 @@ namespace ComputerReparatieshop.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeletePartList(int id, int partId){
+        public ActionResult DeleteOrderPart(int id, int partId){
             try
             {
                 OrderPart_Detail model = new OrderPart_Detail(partDb, OrderPartDb, id, partId);
@@ -239,7 +239,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
         [HttpPost]
-        public ActionResult DeletePartList(int id, int partId, OrderPart OrderPart)
+        public ActionResult DeleteOrderPart(int id, int partId, OrderPart OrderPart)
         {
             try
             {
@@ -248,7 +248,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             catch
             {
-                return DeletePartList(id, partId);
+                return DeleteOrderPart(id, partId);
             }
         }
         [HttpGet]
