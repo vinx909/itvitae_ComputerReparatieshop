@@ -19,14 +19,14 @@ namespace ComputerReparatieshop.Web.Controllers
             this.db = db;
         }
 
-        // GET: Employee
+        [HttpGet]
         public ActionResult Index()
         {
             Employee_Index model = new Employee_Index(db);
             return View(model); ;
         }
 
-        // GET: Employee/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             Employee model = db.Get(id);
@@ -37,14 +37,12 @@ namespace ComputerReparatieshop.Web.Controllers
             return View(model);
         }
 
-        // GET: Employee/Create
+        [HttpGet]
         public ActionResult Create()
         {
             Employee model = new Employee();
             return View(model);
         }
-
-        // POST: Employee/Create
         [HttpPost]
         public ActionResult Create(Employee_Returner returnedEmployee)
         {
@@ -62,7 +60,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Employee/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             try
@@ -79,8 +77,6 @@ namespace ComputerReparatieshop.Web.Controllers
                 return View(ViewNameNotFound);
             }
         }
-
-        // POST: Employee/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, Employee_Returner returnedEmployee)
         {
@@ -98,7 +94,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Employee/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             Employee model = db.Get(id);
@@ -108,8 +104,6 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             return View(model);
         }
-
-        // POST: Employee/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

@@ -17,14 +17,14 @@ namespace ComputerReparatieshop.Web.Controllers
             this.db = db;
         }
 
-        // GET: Customer
+        [HttpGet]
         public ActionResult Index()
         {
             Customer_Index model = new Customer_Index(db);
             return View(model);
         }
 
-        // GET: Customer/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             Customer model = db.Get(id);
@@ -35,13 +35,11 @@ namespace ComputerReparatieshop.Web.Controllers
             return View(model);
         }
 
-        // GET: Customer/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View(new Customer());
         }
-
-        // POST: Customer/Create
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
@@ -59,7 +57,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Customer/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             Customer model = db.Get(id);
@@ -69,8 +67,6 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             return View(model);
         }
-
-        // POST: Customer/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, Customer customer)
         {
@@ -86,7 +82,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Customer/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             Customer model = db.Get(id);
@@ -96,8 +92,6 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             return View(model);
         }
-
-        // POST: Customer/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, Customer customer)
         {

@@ -31,7 +31,6 @@ namespace ComputerReparatieshop.Web.Models
             }
             Constructor(partData, OrderPart);
         }
-
         public OrderPart_Detail(IPartData partData, IOrderPartData OrderPartData, int orderId, int partId)
         {
             OrderPart orderPart = OrderPartData.Get(orderId, partId);

@@ -19,14 +19,14 @@ namespace ComputerReparatieshop.Web.Controllers
             this.db = db;
         }
 
-        // GET: Part
+        [HttpGet]
         public ActionResult Index()
         {
             Part_Index model = new Part_Index(db);
             return View(model);
         }
 
-        // GET: Part/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             Part model = db.Get(id);
@@ -37,14 +37,12 @@ namespace ComputerReparatieshop.Web.Controllers
             return View(model);
         }
 
-        // GET: Part/Create
+        [HttpGet]
         public ActionResult Create()
         {
             Part model = new Part();
             return View(model);
         }
-
-        // POST: Part/Create
         [HttpPost]
         public ActionResult Create(Part_Returner part)
         {
@@ -62,7 +60,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Part/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             Part model = db.Get(id);
@@ -72,8 +70,6 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             return View(model);
         }
-
-        // POST: Part/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, Part_Returner part)
         {
@@ -90,7 +86,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Part/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             Part model = db.Get(id);
@@ -100,8 +96,6 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             return View(model);
         }
-
-        // POST: Part/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

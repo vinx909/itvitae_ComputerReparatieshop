@@ -14,12 +14,15 @@ namespace ComputerReparatieshop.Web.Controllers
     {
         private const int createdOrderStatusId = 1;
         private const bool createdOrderToDO = true;
+
         private const string ViewNameNotFound = "notFound";
         private const string ViewNamePartNotFound = "partNotFound";
         private const string ViewNameImageNotFound = "imageNotFound";
+
         private const string ActionNameIndex = "Index";
         private const string ActionNameIndexWithId = "Index/";
         private const string ActionNameDetails = "Details/";
+
         private readonly ICustomerData customerDb;
         private readonly IEmployeeData employeeDb;
         private readonly IImageData imageListDb;
@@ -39,13 +42,14 @@ namespace ComputerReparatieshop.Web.Controllers
             this.statusDb = statusDb;
         }
 
+        [HttpGet]
         public ActionResult Index(int? id)
         {
             Order_Index model = new Order_Index(employeeDb, customerDb, orderDb, statusDb, id);
             return View(model);
         }
 
-        // GET: Order/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             try
@@ -59,15 +63,13 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Order/Create
+        [HttpGet]
         public ActionResult Create()
         {
             Order_Edit model = new Order_Edit(customerDb, employeeDb, statusDb, new Order());
 
             return View(model);
         }
-
-        // POST: Order/Create
         [HttpPost]
         public ActionResult Create(Order order)
         {
@@ -88,7 +90,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-        // GET: Order/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             try
@@ -101,8 +103,6 @@ namespace ComputerReparatieshop.Web.Controllers
                 return View(ViewNameNotFound);
             }
         }
-
-        // POST: Order/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, Order order)
         {
@@ -134,8 +134,6 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-
-        // GET: Order/Delete/5
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -149,8 +147,6 @@ namespace ComputerReparatieshop.Web.Controllers
                 return View(ViewNameNotFound);
             }
         }
-
-        // POST: Order/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, Order irrelavent)
         {
@@ -166,7 +162,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
         }
 
-
+        [HttpGet]
         public ActionResult DetailsOrderPart(int id, int partId)
         {
             try
@@ -205,13 +201,13 @@ namespace ComputerReparatieshop.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreatePart(int id)
+        public ActionResult CreateOrderPart(int id)
         {
             OrderPart_Create model = new OrderPart_Create(id, partDb);
             return View(model);
         }
         [HttpPost]
-        public ActionResult CreatePart(int id, OrderPart_Create OrderPart)
+        public ActionResult CreateOrderPart(int id, OrderPart_Create OrderPart)
         {
             try
             {
@@ -251,6 +247,7 @@ namespace ComputerReparatieshop.Web.Controllers
                 return DeleteOrderPart(id, partId);
             }
         }
+        
         [HttpGet]
         public ActionResult CreateImage(int id)
         {
@@ -274,6 +271,7 @@ namespace ComputerReparatieshop.Web.Controllers
                 return View(image);
             }
         }
+        
         [HttpGet]
         public ActionResult DetailImage(int id)
         {
@@ -284,6 +282,7 @@ namespace ComputerReparatieshop.Web.Controllers
             }
             return View(model);
         }
+
         [HttpGet]
         public ActionResult DeleteImage(int id)
         {

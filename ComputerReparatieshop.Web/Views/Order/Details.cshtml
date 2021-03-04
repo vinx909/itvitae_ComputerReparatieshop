@@ -75,7 +75,7 @@
         </dd>
 
         <p>
-            @Html.ActionLink("Add New Part", "CreatePart", new { Id = Model.Details.OrderId })
+            @Html.ActionLink("Add New Part", "CreateOrderPart", new { Id = Model.Details.OrderId })
         </p>
         @{ComputerReparatieshop.Web.Models.OrderPart_Detail dummy = Model.OrderParts.FirstOrDefault();}
         <table class="table">
