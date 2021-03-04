@@ -54,7 +54,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Images](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[ImagePath] [varbinary](max) NOT NULL,
+	[ImagePath] VARCHAR(255) NOT NULL,
 	[OrderId] [int] NOT NULL,
 	CONSTRAINT [PK_ImageList] PRIMARY KEY CLUSTERED (
 		[Id] ASC

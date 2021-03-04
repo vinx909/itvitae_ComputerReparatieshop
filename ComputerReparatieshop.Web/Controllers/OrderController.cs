@@ -269,7 +269,7 @@ namespace ComputerReparatieshop.Web.Controllers
                 imageListDb.Create(image);
                 return RedirectToAction(ActionNameDetails + id);
             }
-            catch(Exception e)
+            catch
             {
                 return View(image);
             }

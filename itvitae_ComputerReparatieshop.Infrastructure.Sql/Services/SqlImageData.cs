@@ -17,11 +17,13 @@ namespace ComputerReparatieshop.Infrastructure.Sql.Services
         public void Create(Image image)
         {
             db.Images.Add(image);
+            db.SaveChanges();
         }
 
         public void Delete(Image image)
         {
             db.Images.Remove(image);
+            db.SaveChanges();
         }
 
         public IEnumerable<Image> GetOrderImages(int id)
