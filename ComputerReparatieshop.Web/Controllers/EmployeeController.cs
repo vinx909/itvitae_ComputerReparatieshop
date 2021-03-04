@@ -68,6 +68,10 @@ namespace ComputerReparatieshop.Web.Controllers
             try
             {
                 Employee model = db.Get(id);
+                if (model == null)
+                {
+                    return View(ViewNameNotFound);
+                }
                 return View(model);
             }
             catch (NotFoundInDatabaseException)

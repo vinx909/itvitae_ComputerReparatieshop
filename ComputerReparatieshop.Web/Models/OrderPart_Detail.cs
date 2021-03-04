@@ -34,12 +34,16 @@ namespace ComputerReparatieshop.Web.Models
 
         public OrderPart_Detail(IPartData partData, IOrderPartData OrderPartData, int orderId, int partId)
         {
-            OrderPart OrderPart = OrderPartData.Get(orderId, partId);
-            Part part = partData.Get(OrderPart.PartId);
-            OrderId = OrderPart.OrderId;
-            PartId = OrderPart.PartId;
+            OrderPart orderPart = OrderPartData.Get(orderId, partId);
+            if(orderPart == null)
+            {
+                throw new NotFoundInDatabaseException();
+            }
+            Part part = partData.Get(orderPart.PartId);
+            OrderId = orderPart.OrderId;
+            PartId = orderPart.PartId;
             Name = part.Name;
-            Amount = OrderPart.Amount;
+            Amount = orderPart.Amount;
             Price = part.Price;
         }
 

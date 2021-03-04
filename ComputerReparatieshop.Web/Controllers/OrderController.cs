@@ -280,7 +280,7 @@ namespace ComputerReparatieshop.Web.Controllers
             Image model = imageListDb.Get(id);
             if (model == null)
             {
-                return RedirectToAction(ViewNameImageNotFound);
+                return View(ViewNameImageNotFound);
             }
             return View(model);
         }
