@@ -233,7 +233,7 @@
     <Content Include="Views\Order\todelete.cshtml" />
     <Content Include="Views\Order\DetailsOrderPart.cshtml" />
     <Content Include="Views\Order\EditOrderPart.cshtml" />
-    <Content Include="Views\Order\CreatePart.cshtml" />
+    <Content Include="Views\Order\CreateOrderPart.cshtml" />
     <Content Include="Views\Order\DeleteOrderPart.cshtml" />
     <Content Include="Views\Part\Index.cshtml" />
     <Content Include="Views\Part\Details.cshtml" />

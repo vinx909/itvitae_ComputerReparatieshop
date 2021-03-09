@@ -28,7 +28,7 @@ namespace ComputerReparatieshop.Infrastructure.Sql.Services
 
         public IEnumerable<Image> GetOrderImages(int id)
         {
-            return db.Images.Where(i => i.Id == id);
+            return db.Images.Where(i => i.OrderId == id);
         }
 
         public IEnumerable<Image> GetAll()
